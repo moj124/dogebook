@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RegistrationController extends AbstractController
 {
-    public function register(Request $request, RegistrationService $regService) : Response
+    public function register(Request $request, RegistrationService $registrationService) : Response
     {
         // Create the entity and send to view to be rendered (cool thing called two way databinding)
         $dog = new Dog();
@@ -21,7 +21,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         // Saving the dog if the form is submitted and valid
-        $regService->handleRegistration($dog, $form);
+        $registrationService->handleRegistration($dog, $form);
 
         // Rendering the view if the form has not been submitted
         return $this->render('registration/register.html.twig', [
