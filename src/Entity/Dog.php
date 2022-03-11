@@ -2,28 +2,47 @@
 
 namespace App\Entity;
 
-use App\Repository\DogRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: DogRepository::class)]
-#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
+/**
+ * Dog
+ *
+ * @ORM\Table(name="dogs", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_812c397df85e0677", columns={"username"})})
+ * @ORM\Entity
+ */
 class Dog implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="dogs_id_seq", allocationSize=1, initialValue=1)
+     */
     private $id;
 
-    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="username", type="string", length=180, nullable=false)
+     */
     private $username;
 
-    #[ORM\Column(type: 'json')]
-    private $roles = [];
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="roles", type="json", nullable=false)
+     */
+    private $roles;
 
-    #[ORM\Column(type: 'string')]
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     */
     private $password;
 
     public function getId(): ?int
@@ -109,4 +128,6 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
 }
