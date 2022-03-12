@@ -17,6 +17,20 @@ services:
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
 
+###> symfony/mailer ###
+  web:
+    image: node:16-alpine
+    working_dir: /app
+    command: ["symfony", "server:start"]
+    volumes: [ '.:/app' ]
+###< symfony/mailer ###
+
+###> symfony/mailer ###
+  mailer:
+    image: schickling/mailcatcher
+    ports: [1025, 1080]
+###< symfony/mailer ###
+
 volumes:
 ###> doctrine/doctrine-bundle ###
   db-data:
