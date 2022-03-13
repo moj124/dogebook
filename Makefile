@@ -1,5 +1,5 @@
 #Makefile variables, make code simplier
-COMPOSE ?= compose
+COMPOSE ?= composer
 DOCKER_COMPOSE ?= docker-compose
 DOCKER_RUN ?= ${DOCKER_COMPOSE} run 
 SYMFONY_BIN ?= symfony
