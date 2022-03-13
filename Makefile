@@ -1,10 +1,15 @@
 #Makefile variables, make code simplier
+COMPOSE ?= compose
 DOCKER_COMPOSE ?= docker-compose
 DOCKER_RUN ?= ${DOCKER_COMPOSE} run 
 SYMFONY_BIN ?= symfony
 
 # PHONY sets a virtual target when running Makefile commands, avoids targetting real files!
 # -----------------------------------------------------------------------------------------------
+
+# update dependencies
+update:
+	${COMPOSE} update
 
 # removes all containers associated with dogebooook
 down:
