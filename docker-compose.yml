@@ -18,14 +18,6 @@ services:
 ###< doctrine/doctrine-bundle ###
 
 ###> symfony/mailer ###
-  web:
-    image: node:16-alpine
-    working_dir: /app
-    command: ["symfony", "server:start"]
-    volumes: [ '.:/app' ]
-###< symfony/mailer ###
-
-###> symfony/mailer ###
   mailer:
     image: schickling/mailcatcher
     ports: [1025, 1080]
