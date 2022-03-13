@@ -17,7 +17,7 @@ Please check the php version matches the [requirements](#requirements).
 
 ```
 brew install php
-brew services start php@8.0
+brew services start php@7.4
 php --version
 ```
 
@@ -57,7 +57,7 @@ brew install symfony-cli/tap/symfony-cli
 ### Requirements
 - Docker: [www.docker.com/get-started](https://www.docker.com/get-started)
 - Composer: [getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md)
-- PHP: PHP@^8.0.2
+- PHP: PHP@^7.4
 - Symfony: [symfony.com/doc/current/setup.html](https://symfony.com/doc/current/setup.html)
 ## Run
 ```
