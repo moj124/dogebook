@@ -2,9 +2,7 @@
 Dogebook is a Symfony application created to learn the ins and out of Symfony on the idea of create Dogs' Facebook.
 
 ### Sitemap Plan:
-    ![Sitemap Planning](https://github.com/moj124/dogebook/tree/main/public/resource/images/sitemap.png?raw=true)
-
-https://github.com/moj124/dogebook/tree/main/public
+   <p><img src="https://github.com/moj124/dogebook/blob/main/public/resources/images/sitemap.png" width="35%"><p>
 
 ## Environments
 - Local: [localhost:8000/register](https://localhost:8000/register)
