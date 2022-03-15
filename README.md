@@ -1,4 +1,4 @@
-# Dogebooook
+# Dogebook
 Dogebook is a Symfony application created to learn the ins and out of Symfony on the idea of create Dogs' Facebook.
 
 ### Sitemap Plan:
