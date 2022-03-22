@@ -1,6 +1,6 @@
-index:
+home_landing_page:
    path: /
-   controller: App\Controller\DefaultController::index
+   controller: App\Controller\HomeController::renderHomeLandingPage
    methods: GET
 
 app_register:
