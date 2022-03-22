@@ -1,4 +1,4 @@
-index:
+home_landing_page:
    path: /
    controller: App\Controller\HomeController::renderHomeLandingPage
    methods: GET
