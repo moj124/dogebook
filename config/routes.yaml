@@ -7,3 +7,19 @@ app_register:
   path: /register
   controller: App\Controller\RegistrationController::register
   methods: GET|POST
+
+login:
+   path: /login
+   controller: App\Controller\LoginController::login
+   methods: GET|POST
+
+about:
+   path: /about
+   controller: App\Controller\AboutController::renderAboutPage
+   methods: GET
+
+contact_us:
+   path: /contact_us
+   controller: App\Controller\AboutController::renderContactUsPage
+   methods: GET|POST
+
