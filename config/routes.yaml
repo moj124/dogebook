@@ -10,16 +10,19 @@ app_register:
 
 login:
    path: /login
-   controller: App\Controller\LoginController::login
-   methods: GET|POST
+   controller: App\Controller\LoginController::index
+   methods: GET
+
+
 
 about:
    path: /about
-   controller: App\Controller\AboutController::renderAboutPage
+   controller: App\Controller\HomeController::renderAboutPage
    methods: GET
 
 contact_us:
    path: /contact_us
-   controller: App\Controller\AboutController::renderContactUsPage
-   methods: GET|POST
+   controller: App\Controller\ContactController::renderContactUsPage
+   methods: GET
+
 
