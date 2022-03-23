@@ -21,7 +21,11 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         // Saving the dog if the form is submitted and valid
-        $registrationService->handleRegistration($dog, $form);
+        if($registrationService->handleRegistration($dog, $form)){
+            return $this->render('');
+        }
+
+
 
         // Rendering the view if the form has not been submitted
         return $this->render('registration/register.html.twig', [

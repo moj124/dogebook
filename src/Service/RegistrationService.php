@@ -22,8 +22,9 @@ class RegistrationService
         $this->dogService = $dogService;
     }
 
-    public function handleRegistration(Dog $dog, FormInterface $form): void
+    public function handleRegistration(Dog $dog, FormInterface $form): bool
     {
+        // is form posted in POST HTTP Response and is the form valid
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $dog->setPassword(
@@ -35,6 +36,9 @@ class RegistrationService
 
             $this->dogService->saveDog($dog);
             // do anything else you need here, like send an email
+
+            return true;
         }
+        return false;
     }
 }
