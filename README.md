@@ -5,7 +5,8 @@ Dogebook is a Symfony application created to learn the ins and out of Symfony on
   [<p><img src="https://github.com/moj124/dogebook/blob/main/public/resources/images/sitemap.png" width="35%"><p>](https://www.gloomaps.com/nbjvQJtPtA)
 
 ## Environments
-- Local: [localhost:8000/register](https://localhost:8000/register)
+- Local: [localhost:8000/register](https://localhost:8000) & [404 Page](https://localhost:8000/_error/404)
+
 ## Installation
 
 ### Mac/Linux
