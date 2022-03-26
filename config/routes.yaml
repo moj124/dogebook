@@ -25,7 +25,7 @@ about:
 
 contact_us:
    path: /contact_us
-   controller: App\Controller\ContactController::renderContactUsPage
+   controller: App\Controller\HomeController::renderContactUsPage
    methods: GET
 
 
