@@ -9,7 +9,7 @@ about:
    methods: GET
 
 contact_us:
-   path: /contact_us
+   path: /contact-us
    controller: App\Controller\HomeController::renderContactUsPage
    methods: GET
 
@@ -19,7 +19,7 @@ login:
    methods: GET
 
 reset_password:
-   path: /login/identity
+   path: /login/reset-password
    controller: App\Controller\LoginController::renderResetPasswordPage
    methods: GET
 
