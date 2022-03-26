@@ -13,15 +13,20 @@ contact_us:
    controller: App\Controller\HomeController::renderContactUsPage
    methods: GET
 
-app_register:
-  path: /register
-  controller: App\Controller\RegistrationController::register
-  methods: GET|POST
-
 login:
    path: /login
    controller: App\Controller\LoginController::index
    methods: GET
+
+register:
+   path: /register
+   controller: App\Controller\RegisterController::index
+   methods: GET
+
+app_register:
+  path: /register
+  controller: App\Controller\RegistrationController::register
+  methods: POST
 
 app_login:
    path: /login
