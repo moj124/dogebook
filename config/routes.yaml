@@ -1,4 +1,4 @@
-home_landing_page:
+home:
    path: /
    controller: App\Controller\HomeController::renderHomeLandingPage
    methods: GET
@@ -13,7 +13,10 @@ login:
    controller: App\Controller\LoginController::index
    methods: GET
 
-
+app_login:
+   path: /login
+   controller: App\Controller\LoginController::login
+   methods: POST
 
 about:
    path: /about
