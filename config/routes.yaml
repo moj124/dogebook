@@ -18,6 +18,11 @@ login:
    controller: App\Controller\LoginController::index
    methods: GET
 
+reset_password:
+   path: /login/identity
+   controller: App\Controller\LoginController::renderResetPasswordPage
+   methods: GET
+
 register:
    path: /register
    controller: App\Controller\RegisterController::index
