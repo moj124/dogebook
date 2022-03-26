@@ -23,6 +23,31 @@ reset_password:
    controller: App\Controller\LoginController::renderResetPasswordPage
    methods: GET
 
+app_reset_password:
+   path: /login/reset-password
+   controller: App\Controller\LoginController::resetPassword
+   methods: POST
+
+feed:
+   path: /feed
+   controller: App\Controller\FeedController::index
+   methods: GET
+
+profile:
+   path: /profile
+   controller: App\Controller\ProfileController::index
+   methods: GET
+
+groups:
+   path: /groups
+   controller: App\Controller\GroupsController::index
+   methods: GET
+
+notifications:
+   path: /notifications
+   controller: App\Controller\NotificationsController::index
+   methods: GET
+
 register:
    path: /register
    controller: App\Controller\RegisterController::index
