@@ -28,6 +28,11 @@ register:
    controller: App\Controller\RegisterController::index
    methods: GET
 
+welcome:
+   path: /register/welcome
+   controller: App\Controller\RegistrationController::renderRegisterPage
+   methods: GET
+
 app_register:
   path: /register
   controller: App\Controller\RegistrationController::register
