@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    public function renderHomeLandingPage(): Response
+    public function index(): Response
     {
        return $this->render('/homeLandingPage.html.twig');
     }
