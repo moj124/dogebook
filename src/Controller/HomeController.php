@@ -14,11 +14,11 @@ class HomeController extends AbstractController
 
     public function renderAboutPage(): Response
     {
-       return $this->render('/homeLandingPage.html.twig');
+       return $this->render('');
     }
 
     public function renderContactUsPage(): Response
     {
-       return $this->render('/homeLandingPage.html.twig');
+       return $this->render('');
     }
 }
