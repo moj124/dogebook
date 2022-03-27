@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Dog;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends AbstractController
@@ -20,5 +22,23 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
+    }
+
+    public function renderResetPasswordPage(): Response
+    {
+        return $this->render('');
+    }
+
+    public function reset_password(Request $request): Response
+    {
+        // Create the entity and send to view to be rendered (cool thing called two way databinding)
+        $dog = new Dog();
+        $form = $this->createForm(RegistrationFormType::class, $dog);
+
+        $form->handleRequest($request);
+
+        
+
+        return $this->render('');
     }
 }
