@@ -55,7 +55,7 @@ register:
 
 welcome:
    path: /register/welcome
-   controller: App\Controller\RegistrationController::renderRegisterPage
+   controller: App\Controller\RegistrationController::renderRegisterWelcomePage
    methods: GET
 
 app_register:
