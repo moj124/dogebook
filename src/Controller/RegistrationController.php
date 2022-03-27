@@ -11,6 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RegistrationController extends AbstractController
 {
+    public function index() : Response {
+        return $this->render('registration/register.html.twig');
+    }
+
     public function register(Request $request, RegistrationService $registrationService) : Response
     {
         // Create the entity and send to view to be rendered (cool thing called two way databinding)
