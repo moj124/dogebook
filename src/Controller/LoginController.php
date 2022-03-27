@@ -37,8 +37,6 @@ class LoginController extends AbstractController
 
         $form->handleRequest($request);
 
-        
-
         return $this->render('');
     }
 }
