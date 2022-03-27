@@ -50,7 +50,7 @@ notifications:
 
 register:
    path: /register
-   controller: App\Controller\RegisterController::index
+   controller: App\Controller\RegistrationController::index
    methods: GET
 
 welcome:
