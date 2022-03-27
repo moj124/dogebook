@@ -32,8 +32,10 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $dog);
 
         // Interesting thing Symfony does where a route can handle both POST and GET
+        // could we only do the POST functionality instead?
+        // --------------------------
         $form->handleRequest($request);
-
+        //---------------------------
         // Saving the dog if the form is submitted and valid
         if($registrationService->handleRegistration($dog, $form)){
             return $this->render('');
