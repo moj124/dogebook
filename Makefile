@@ -23,10 +23,8 @@ up-all:
 
 # starts the symfony server in a isolated environment, with the default port 8000
 serve:
-	${SYMFONY_BIN} server:ca:install
 	${SYMFONY_BIN} serve -d
 .PHONY: serve
-
 
 # Useful aliases
 # -----------------------------------------------------------------------------------------------

@@ -1,28 +1,72 @@
-home_landing_page:
+home:
    path: /
-   controller: App\Controller\HomeController::renderHomeLandingPage
+   controller: App\Controller\HomeController::index
    methods: GET
-
-app_register:
-  path: /register
-  controller: App\Controller\RegistrationController::register
-  methods: GET|POST
-
-login:
-   path: /login
-   controller: App\Controller\LoginController::index
-   methods: GET
-
-
-
+   
 about:
    path: /about
    controller: App\Controller\HomeController::renderAboutPage
    methods: GET
 
 contact_us:
-   path: /contact_us
-   controller: App\Controller\ContactController::renderContactUsPage
+   path: /contact-us
+   controller: App\Controller\HomeController::renderContactUsPage
    methods: GET
+
+login:
+   path: /login
+   controller: App\Controller\LoginController::index
+   methods: GET
+
+reset_password:
+   path: /login/reset-password
+   controller: App\Controller\LoginController::renderResetPasswordPage
+   methods: GET
+
+app_reset_password:
+   path: /login/reset-password
+   controller: App\Controller\LoginController::resetPassword
+   methods: POST
+
+feed:
+   path: /feed
+   controller: App\Controller\FeedController::index
+   methods: GET
+
+profile:
+   path: /profile
+   controller: App\Controller\ProfileController::index
+   methods: GET
+
+groups:
+   path: /groups
+   controller: App\Controller\GroupsController::index
+   methods: GET
+
+notifications:
+   path: /notifications
+   controller: App\Controller\NotificationsController::index
+   methods: GET
+
+register:
+   path: /register
+   controller: App\Controller\RegistrationController::index
+   methods: GET
+
+welcome:
+   path: /register/welcome
+   controller: App\Controller\RegistrationController::renderRegisterWelcomePage
+   methods: GET
+
+app_register:
+  path: /register
+  controller: App\Controller\RegistrationController::register
+  methods: POST
+
+app_login:
+   path: /login
+   controller: App\Controller\LoginController::login
+   methods: POST
+
 
 
