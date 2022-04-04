@@ -68,5 +68,10 @@ app_login:
    controller: App\Controller\LoginController::login
    methods: POST
 
+logout:
+   path: /logout
+   controller: App\Controller\LoginController::logout
+   methods: GET
+
 
 

@@ -3,8 +3,15 @@
 {% block body %}
     <section>
         <h1 class="display-1 py-4">Welcome to Dogebook</h1>
-        <h3 class="lead">Here to connect dogs of all kinds</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam, provident!</p>
-        <!-- Images aren't loading -->
+        <h3 class="lead text-center">Hang out here to connect with dogs of all kinds</h3>
+        <div class="d-flex justify-content-center my-4">
+            <a href="/register" type="button" class="btn btn-outline-primary m-2">Register</a>
+            <a href="/login" type="button" class="btn btn-primary m-2">Log in</a>
+        </div>
+        <p class="lead text-center">
+            Enjoy the doggos. Look at this one to get you warmed up!!
+        </p>
+
+        <img class="img-fluid rounded mx-auto d-block" src="https://images.dog.ceo/breeds/puggle/IMG_153357.jpg" alt="dog image" style="height: 400px;" />
     </section>
 {% endblock %}

@@ -39,4 +39,9 @@ class LoginController extends AbstractController
 
         return $this->render('');
     }
+
+    // This is intercepted by Symfony magic. No need for an implemention
+    public function logout()
+    {
+    }
 }

@@ -2,6 +2,10 @@
 
 {% block body %}
     <section>
-        {{app.user.name}}
+    {%if is_granted("IS_AUTHENTICATED_FULLY")%}
+        {{app.user.username}}
+    {% else %}
+        <p>You need to log in</p>
+    {% endif %}
     </section>
 {% endblock %}

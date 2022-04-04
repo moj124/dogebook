@@ -28,6 +28,10 @@ security:
                 login_path: login
                 check_path: app_login
 
+            logout:
+                target: /
+                invalidate_session: true
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
