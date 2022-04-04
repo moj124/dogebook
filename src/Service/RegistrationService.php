@@ -13,13 +13,13 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationService
 {
-    private UserPasswordHasherInterface $userPasswordHasher;
     private DogCRUDService $dogService;
+    private UserPasswordHasherInterface $userPasswordHasher;
 
-    public function __construct(UserPasswordHasherInterface $userPasswordHasher, DogCRUDService $dogService)
+    public function __construct(DogCRUDService $dogService, UserPasswordHasherInterface $userPasswordHasher)
     {
-        $this->UserPasswordHasher = $userPasswordHasher;
         $this->dogService = $dogService;
+        $this->userPasswordHasher = $userPasswordHasher;
     }
 
     public function handleRegistration(Dog $dog, FormInterface $form): bool
@@ -33,7 +33,7 @@ class RegistrationService
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            $dog->setRoles($dog->getRoles());
             $this->dogService->saveDog($dog);
             // do anything else you need here, like send an email
 

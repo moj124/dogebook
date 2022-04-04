@@ -14,7 +14,7 @@ class HomeController extends AbstractController
 
     public function renderAboutPage(): Response
     {
-       return $this->render('');
+       return $this->render('about-us/index.html.twig', ['user' => $this->getUser()]);
     }
 
     public function renderContactUsPage(): Response
