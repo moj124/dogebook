@@ -4,7 +4,7 @@ home:
    methods: GET
    
 about:
-   path: /about
+   path: /about-us
    controller: App\Controller\HomeController::renderAboutPage
    methods: GET
 
@@ -15,7 +15,7 @@ contact_us:
 
 login:
    path: /login
-   controller: App\Controller\LoginController::index
+   controller: App\Controller\LoginController::login
    methods: GET
 
 reset_password:

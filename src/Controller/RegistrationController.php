@@ -8,6 +8,8 @@ use App\Service\RegistrationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -38,7 +40,7 @@ class RegistrationController extends AbstractController
         //---------------------------
         // Saving the dog if the form is submitted and valid
         if($registrationService->handleRegistration($dog, $form)){
-            return $this->render('');
+            return $this->render('This worked. HoORAY');
         }
 
         // Rendering the view if the form has not been submitted

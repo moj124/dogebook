@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends AbstractController
 {
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
