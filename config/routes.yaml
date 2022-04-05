@@ -5,12 +5,12 @@ home:
    
 about:
    path: /about-us
-   controller: App\Controller\HomeController::renderAboutPage
+   controller: App\Controller\HomeController::aboutUs
    methods: GET
 
 contact_us:
    path: /contact-us
-   controller: App\Controller\HomeController::renderContactUsPage
+   controller: App\Controller\HomeController::contactUs
    methods: GET
 
 login:
