@@ -24,7 +24,7 @@ class RegistrationController extends AbstractController
 
     public function renderRegisterWelcomePage() : Response 
     {
-        return $this->render('');
+        return $this->render('registration/welcome.html.twig');
     }
 
     public function register(Request $request, RegistrationService $registrationService) : Response
@@ -40,7 +40,7 @@ class RegistrationController extends AbstractController
         //---------------------------
         // Saving the dog if the form is submitted and valid
         if($registrationService->handleRegistration($dog, $form)){
-            return $this->redirectToRoute('/login');
+            return $this->redirectToRoute('login');
         }
 
         // Rendering the view if the form has not been submitted
