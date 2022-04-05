@@ -3,6 +3,12 @@ Dogebook is a Symfony application created to learn the ins and out of Symfony on
 
 ### Sitemap Plan:
   [<p><img src="https://github.com/moj124/dogebook/blob/main/public/resources/images/sitemap.png" width="35%"><p>](https://www.gloomaps.com/nbjvQJtPtA)
+  
+### Kanban Board:
+  [<p><img width="35%" alt="Screenshot 2022-04-05 at 22 10 01" src="https://user-images.githubusercontent.com/32649229/161849658-f63982c4-5bd9-47aa-a03a-a5981642ef31.png"><p>](https://www.notion.so/af6e85e83ddd45be9f12525a7a0da854?v=e8ce83ff98064b3cb87560e545a2d496)
+    
+### Figma Site Design:
+  [<p><img width="10%" alt="Screenshot 2022-04-05 at 22 10 01" src="https://user-images.githubusercontent.com/32649229/161850645-70f2b1fe-1ca7-4b7f-a588-c1533da6e564.svg"><p>](https://www.figma.com/file/HtpSRUdIA4lW0fh2vLeyX2/Dogebook?node-id=0%3A1)
 
 ## Environments
 - Local: [localhost:8000](https://localhost:8000) & [404 Page](https://localhost:8000/_error/404)
