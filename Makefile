@@ -10,12 +10,12 @@ SYMFONY_BIN ?= symfony
 # migrate database to latest structure
 migrate:
 	php bin/console doctrine:migrations:migrate
-.PHONY migrate
+.PHONY: migrate
 
 # update dependencies
 update:
 	${COMPOSE} update
-
+.PHONY: update
 # removes all containers associated with dogebooook
 down:
 	${DOCKER_COMPOSE} down
