@@ -9,7 +9,6 @@ SYMFONY_BIN ?= symfony
 
 # migrate database to latest structure
 migrate:
-	php bin/console doctrine:migrations:diff
 	php bin/console doctrine:migrations:migrate
 .PHONY: migrate
 
