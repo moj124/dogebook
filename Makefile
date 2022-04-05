@@ -18,7 +18,7 @@ update:
 .PHONY: update
 # removes all containers associated with dogebooook
 down:
-	${DOCKER_COMPOSE} down
+	${DOCKER_COMPOSE} down -v
 .PHONY: down
 
 # starts the mailer, database images which runs in the an isolated environment
