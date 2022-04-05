@@ -9,6 +9,7 @@ SYMFONY_BIN ?= symfony
 
 # migrate database to latest structure
 migrate:
+	php bin/console doctrine:migrations:diff
 	php bin/console doctrine:migrations:migrate
 .PHONY: migrate
 
@@ -18,7 +19,7 @@ update:
 .PHONY: update
 # removes all containers associated with dogebooook
 down:
-	${DOCKER_COMPOSE} down -v
+	${DOCKER_COMPOSE} down
 .PHONY: down
 
 # starts the mailer, database images which runs in the an isolated environment
