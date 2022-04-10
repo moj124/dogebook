@@ -8,8 +8,6 @@ use App\Service\RegistrationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -19,12 +17,12 @@ class RegistrationController extends AbstractController
         $dog = new Dog();
         $form = $this->createForm(RegistrationFormType::class, $dog);
 
-        return $this->render('registration/register.html.twig',['registrationForm' => $form->createView(),]);
+        return $this->render('auth/registration/register.html.twig',['registrationForm' => $form->createView(),]);
     }
 
     public function renderRegisterWelcomePage() : Response 
     {
-        return $this->render('registration/welcome.twig');
+        return $this->render('auth/registration/welcome.twig');
     }
 
     public function register(Request $request, RegistrationService $registrationService) : Response
@@ -44,7 +42,7 @@ class RegistrationController extends AbstractController
         }
 
         // Rendering the view if the form has not been submitted
-        return $this->render('registration/register.html.twig', [
+        return $this->render('auth/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }

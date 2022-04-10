@@ -4,10 +4,18 @@
     <section>
         <h1 class="display-1 py-4">Welcome to Dogebook</h1>
         <h3 class="lead text-center">Hang out here to connect with dogs of all kinds</h3>
+
+        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
         <div class="d-flex justify-content-center my-4">
             <a href="/register" type="button" class="btn btn-outline-primary m-2">Register</a>
             <a href="/login" type="button" class="btn btn-primary m-2">Log in</a>
         </div>
+        {% else %}
+        <div class="d-flex justify-content-center my-4">
+            <a href="/activity-feed" type="button" class="btn btn-outline-primary m-2">Go to my feed</a>
+        </div>
+        {% endif %}
+
         <p class="lead text-center">
             Enjoy the doggos. Look at this one to get you warmed up!!
         </p>

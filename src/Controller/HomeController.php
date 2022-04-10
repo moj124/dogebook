@@ -11,14 +11,15 @@ class HomeController extends AbstractController
     public function index(DogImageService $dogImageService): Response
     {
        $imageString = $dogImageService->getRandomDogImageString();
-       return $this->render('/homeLandingPage.html.twig', [
+       
+       return $this->render('home/landingPage.html.twig', [
           'imageSrc' => $imageString
        ]);
     }
 
     public function aboutUs(): Response
     {
-       return $this->render('about-us/index.html.twig', ['user' => $this->getUser()]);
+       return $this->render('home/about-us.html.twig');
     }
 
     public function contactUs(): Response
