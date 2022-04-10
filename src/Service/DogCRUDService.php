@@ -22,5 +22,4 @@ class DogCRUDService
     {
         $this->dogRepository->add($dog);
     }
-
 }

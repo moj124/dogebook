@@ -4,7 +4,8 @@ namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class DogImageService {
+class DogImageService 
+{
     const DOG_API_URL = 'https://dog.ceo/api/breeds/image/random';
 
     private HttpClientInterface $client;
