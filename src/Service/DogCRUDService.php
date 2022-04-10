@@ -18,7 +18,7 @@ class DogCRUDService
      * @accepts Dog $dog
      * @returns void
      */
-    public function saveDog(Dog $dog) : void
+    public function saveDog(Dog $dog): void
     {
         $this->dogRepository->add($dog);
     }

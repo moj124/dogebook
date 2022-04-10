@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Repository\DogRepository;
+use App\Service\DogImageService;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RegistrationControllerTest extends WebTestCase
