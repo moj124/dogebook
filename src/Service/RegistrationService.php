@@ -4,10 +4,6 @@ namespace App\Service;
 
 use Symfony\Component\Form\FormInterface;
 use App\Entity\Dog;
-use App\Form\RegistrationFormType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
