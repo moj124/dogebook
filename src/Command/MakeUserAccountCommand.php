@@ -12,13 +12,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-#[AsCommand(
-    name: 'app:make-user-account',
-    description: 'Create a user account for testing purposes',
-)]
 class MakeUserAccountCommand extends Command
 {
-
+    protected static $defaultName = 'app:make-user-account';
     private DogCRUDService $dogCrudService;
     private UserPasswordHasherInterface $userPasswordHasher;
 
