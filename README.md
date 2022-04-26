@@ -10,6 +10,10 @@ Dogebook is a Symfony application created to learn the ins and out of Symfony on
 ### Figma Site Design:
   [<p><img width="10%" alt="Screenshot 2022-04-05 at 22 10 01" src="https://user-images.githubusercontent.com/32649229/161850645-70f2b1fe-1ca7-4b7f-a588-c1533da6e564.svg"><p>](https://www.figma.com/file/HtpSRUdIA4lW0fh2vLeyX2/Dogebook?node-id=0%3A1)
 
+### Database Schema:
+     [<p><img width="1076" alt="Screenshot 2022-04-26 at 23 20 11" src="https://user-images.githubusercontent.com/32649229/165402351-7711725e-53bc-4f6f-8566-227f3d3cbc36.png"><p>](https://dbdiagram.io/d/625ebbb31072ae0b6aac0958)
+
+
 ## Environments
 - Local: [localhost:8000](https://localhost:8000) & [404 Page](https://localhost:8000/_error/404)
 
