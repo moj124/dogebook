@@ -21,7 +21,7 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="")
      * @ORM\SequenceGenerator(sequenceName="dogs_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
@@ -48,7 +48,7 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="dog_id", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="dog", orphanRemoval=true)
      */
     private $posts;
 
