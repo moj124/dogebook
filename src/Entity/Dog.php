@@ -169,6 +169,4 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
 }

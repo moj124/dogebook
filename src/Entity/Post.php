@@ -24,7 +24,7 @@ class Post
      * @ORM\ManyToOne(targetEntity=Dog::class, inversedBy="posts")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $dog_id;
+    private $dog;
 
     /**
      * @ORM\Column(type="text", nullable=false)
