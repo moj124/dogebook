@@ -152,7 +152,7 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
-            $post->setDogId($this);
+            $post->setDogId($this->getId());
         }
 
         return $this;

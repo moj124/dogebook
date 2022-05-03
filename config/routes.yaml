@@ -35,12 +35,12 @@ feed:
 
 form_post:
    path: /add-post
-   controller: App\Controller\FeedController::index
+   controller: App\Controller\FeedController::createPost
    methods: GET
 
 add_post:
    path: /add-post
-   controller: App\Controller\FeedController::add_post
+   controller: App\Controller\FeedController::createPost
    methods: POST
 
 profile:
