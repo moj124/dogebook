@@ -21,8 +21,7 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="")
-     * @ORM\SequenceGenerator(sequenceName="dogs_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\GeneratedValue
      */
     private $id;
 
