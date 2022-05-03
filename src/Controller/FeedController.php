@@ -31,8 +31,13 @@ class FeedController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            
+            $this->postService->savePost($post);
+            return $this->redirectToRoute('feed');
         }
 
+        // Rendering the view if the form has not been submitted
+        return $this->render('feed/post/add-post.html.twig', [
+            'postForm' => $form->createView(),
+        ]);
     }
 }
