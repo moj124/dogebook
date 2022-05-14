@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section>
-        View post here
-    </section>
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.postText }} <strong>Author: {{ post.dogID.username }}</strong></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

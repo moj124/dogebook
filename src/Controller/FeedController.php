@@ -12,9 +12,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FeedController extends AbstractController
 {
-    public function index(): Response
+    public function index(DogCRUDService $dogService): Response
     {
-        return $this->render('feed/feed.html.twig');
+        $dogUser = $this->getUser();
+        $posts = $dogService->getAllPosts($dogUser);
+
+        return $this->render('feed/feed.html.twig', 
+        [
+            'posts' => $posts,
+        ]
+    );
     }
 
     public function createPost(Request $request, PostCRUDService $postService, DogCRUDService $dogService): Response 
