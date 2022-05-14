@@ -19,7 +19,7 @@ class PostCRUDService
      * @returns void
      */
     public function savePost(Post $post): void
-    {
+    {   
         $this->postRepository->add($post);
     }
 }
