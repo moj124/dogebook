@@ -29,7 +29,7 @@ class DogCRUDService
 
     public function savePostForDog(Dog $dog,Post $post): void
     {
-        $post->setDogId($dog->getId());
+        $post->setDogId($dog);
         $this->postRepository->add($post);
     }
 }
