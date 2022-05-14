@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Service\PostCRUDService;
+use App\Service\DogCRUDService;
 use App\Form\PostFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,16 +17,17 @@ class FeedController extends AbstractController
         return $this->render('feed/feed.html.twig');
     }
 
-    public function createPost(Request $request, PostCRUDService $postService): Response 
+    public function createPost(Request $request, PostCRUDService $postService, DogCRUDService $dogService): Response 
     {
         $post = new Post();
 
         $form = $this->createForm(PostFormType::class, $post);
 
+        $dogUser = $this->getUser();
         $form->handleRequest($request);
-
+        
         if($form->isSubmitted() && $form->isValid()) {
-
+            $dogService->savePostForDog($dogUser, $post);
             $postService->savePost($post);
             return $this->redirectToRoute('/feed');
         }
