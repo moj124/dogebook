@@ -32,4 +32,13 @@ class DogCRUDService
         $post->setDogId($dog);
         $this->postRepository->add($post);
     }
+
+    /**
+     * @accepts Dog $dog
+     * @return Post[]
+     */
+    public function getAllPosts(Dog $dog): iterable
+    {
+        return $this->postRepository->findAllPostsByDog($dog);
+    }
 }
