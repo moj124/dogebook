@@ -13,7 +13,7 @@ class HomeControllerTest extends WebTestCase
         $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'welcome to dogebook');
+        $this->assertSelectorTextContains('h1', 'Welcome to Dogebook');
     }
 
     /**

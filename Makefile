@@ -7,6 +7,10 @@ SYMFONY_BIN ?= symfony
 # PHONY sets a virtual target when running Makefile commands, avoids targetting real files!
 # -----------------------------------------------------------------------------------------------
 
+# run tests
+tests:
+	./vendor/bin/simple-phpunit
+.PHONY: tests
 # migrate database to latest structure
 migrate:
 	php bin/console doctrine:migrations:migrate

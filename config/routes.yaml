@@ -33,6 +33,16 @@ feed:
    controller: App\Controller\FeedController::index
    methods: GET
 
+form_post:
+   path: /add-post
+   controller: App\Controller\FeedController::createPost
+   methods: GET
+
+add_post:
+   path: /add-post
+   controller: App\Controller\FeedController::createPost
+   methods: POST
+
 profile:
    path: /profile
    controller: App\Controller\ProfileController::index

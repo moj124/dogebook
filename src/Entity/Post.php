@@ -49,12 +49,12 @@ class Post
 
     public function getDogId(): ?dog
     {
-        return $this->dog_id;
+        return $this->dog;
     }
 
-    public function setDogId(?dog $dog_id): self
+    public function setDogId(?Dog $dog): self
     {
-        $this->dog_id = $dog_id;
+        $this->dog = $dog;
 
         return $this;
     }
