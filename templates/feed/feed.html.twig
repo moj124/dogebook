@@ -3,7 +3,7 @@
 {% block body %}
     <ul>
         {% for post in posts %}
-            <li>{{ post.postText }} <strong>Author: {{ post.dogID.username }}</strong></li>
+            <li>{{ post.postText }} <strong>Author: {{ post.dog.username }}</strong></li>
         {% endfor %}
     </ul>
-{% endblock %}
+{% endblock %} 

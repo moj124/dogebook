@@ -161,8 +161,8 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->posts->removeElement($post)) {
             // set the owning side to null (unless already changed)
-            if ($post->getDogId() === $this) {
-                $post->setDogId(null);
+            if ($post->getDog() === $this) {
+                $post->setDog(null);
             }
         }
 
