@@ -4,34 +4,32 @@ namespace App\Tests\Controller;
 
 use App\Entity\Post;
 use App\Entity\Dog;
-use App\Service\DogCRUDService;
-use App\Service\PostCRUDService;
+use App\Repository\DogRepository;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class FeedControllerTest extends WebTestCase
 {
-    public function testPostCanBeCreated(): void
+    public function testItSubmitAndCreatePost(): void
     {
-        self::bootKernel();
-
-        $dogRepo = static::getContainer()->get(DogCRUDService::class);
-        $dog = new Dog();
-        $dog->setUserName('admin');
-        $dog->setPassword('password123');
-        $dogRepo->saveDog($dog);
-
+        $client = static::createClient();
+        $dogRepo = static::getContainer()->get(DogRepository::class);
         
+        $testUser = $dogRepo->findOneByUsername('testUser');
+        
+        $client->loginUser($testUser);
 
-        $post = new Post();
-
-
-        $post->setDogId($dog->getId());
-        $post->setPostText("Woof Woof");
-        $post->setCreatedAt(new \DateTimeImmutable());
-
-        $postRepo->savePost($post);
-        echo($dog);
-        // $this->assertTrue($newDog->getUserIdentifier() === 'test123');
-        // $client->followRedirects(true);
+        $crawler = $client->request('GET','/add-post');
+        // var_dump($client->getResponse()->getContent());
+        
+        $form = $crawler->selectButton('Save')->form();
+        $form["post_form[post_text]"] = "testing post";
+        
+        $crawler = $client->submit($form);
+        
+        $postRepo = static::getContainer()->get(PostRepository::class);
+        $newPost = $postRepo->findBy(['post_text' => 'testing post'])[0];
+        $this->assertTrue($newPost->getPostText() === 'testing post');
+        $client->followRedirects(true);
     }
 }

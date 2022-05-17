@@ -38,7 +38,7 @@ class RegistrationController extends AbstractController
         //---------------------------
         // Saving the dog if the form is submitted and valid
         if($registrationService->handleRegistration($dog, $form)){
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('home');
         }
 
         // Rendering the view if the form has not been submitted

@@ -6,6 +6,7 @@ use App\Repository\PostRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -32,6 +33,7 @@ class Post
     private $post_text;
 
     /**
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime_immutable")
      */
     private $created_at;
@@ -47,12 +49,12 @@ class Post
         return $this->id;
     }
 
-    public function getDogId(): ?dog
+    public function getDog(): ?dog
     {
         return $this->dog;
     }
 
-    public function setDogId(?Dog $dog): self
+    public function setDog(?Dog $dog): self
     {
         $this->dog = $dog;
 
