@@ -681,5 +681,11 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "zenstruck/assert": {
+        "version": "v1.0.1"
+    },
+    "zenstruck/messenger-test": {
+        "version": "v1.4.1"
     }
 }

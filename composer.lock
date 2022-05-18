@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a48f37d12449495f4943c61725e469f",
+    "content-hash": "d419c2fd11724ca2662d2fb7bf0a7ac1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10951,6 +10951,132 @@
                 }
             ],
             "time": "2021-07-28T10:34:58+00:00"
+        },
+        {
+            "name": "zenstruck/assert",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zenstruck/assert.git",
+                "reference": "45c0a9d7ce3cbfb4de2b43bad77d08b0e3d61101"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zenstruck/assert/zipball/45c0a9d7ce3cbfb4de2b43bad77d08b0e3d61101",
+                "reference": "45c0a9d7ce3cbfb4de2b43bad77d08b0e3d61101",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/polyfill-php73": "^1.8",
+                "symfony/polyfill-php80": "^1.15",
+                "symfony/polyfill-php81": "^1.23"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.4",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "symfony/phpunit-bridge": "^5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zenstruck\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Bond",
+                    "email": "kevinbond@gmail.com"
+                }
+            ],
+            "description": "Standalone, lightweight, framework agnostic, test assertion library.",
+            "homepage": "https://github.com/zenstruck/assert",
+            "keywords": [
+                "assertion",
+                "phpunit",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/zenstruck/assert/issues",
+                "source": "https://github.com/zenstruck/assert/tree/v1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-02-14T17:08:11+00:00"
+        },
+        {
+            "name": "zenstruck/messenger-test",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zenstruck/messenger-test.git",
+                "reference": "a70c26913f6221aed538d26d3c634a354e784137"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zenstruck/messenger-test/zipball/a70c26913f6221aed538d26d3c634a354e784137",
+                "reference": "a70c26913f6221aed538d26d3c634a354e784137",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "symfony/framework-bundle": "^4.4|^5.0|^6.0",
+                "symfony/messenger": "^4.4|^5.0|^6.0",
+                "zenstruck/assert": "^1.0"
+            },
+            "conflict": {
+                "symfony/framework-bundle": "5.4.5|6.0.5"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.4",
+                "phpunit/phpunit": "^9.5.0",
+                "symfony/browser-kit": "^4.4|^5.0|^6.0",
+                "symfony/phpunit-bridge": "^5.3",
+                "symfony/yaml": "^4.4|^5.0|^6.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Zenstruck\\Messenger\\Test\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Bond",
+                    "email": "kevinbond@gmail.com"
+                }
+            ],
+            "description": "Assertions and helpers for testing your symfony/messenger queues.",
+            "homepage": "https://github.com/zenstruck/messenger-test",
+            "keywords": [
+                "Messenger",
+                "queue",
+                "symfony",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/zenstruck/messenger-test/issues",
+                "source": "https://github.com/zenstruck/messenger-test/tree/v1.4.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-03-04T13:51:13+00:00"
         }
     ],
     "aliases": [],
