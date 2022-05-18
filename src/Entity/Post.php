@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use App\Service\RegistrationService;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -41,7 +42,6 @@ class Post
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        $this->created_at = new DateTimeImmutable();
     }
 
     public function getId(): ?int
