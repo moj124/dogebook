@@ -1,15 +1,16 @@
 <?php
 namespace App\DataFixtures;
 
-// src/DataFixtures/AppFixtures.php
 use App\Entity\Dog;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AppFixtures extends Fixture
+class UserFixture extends Fixture
 {
     private UserPasswordHasherInterface $hasher;
+    public const USER_REFERENCE = 'USER';
+    public const ADMIN_REFERENCE = 'ADMIN';
 
     public function __construct(UserPasswordHasherInterface $hasher)
     {
@@ -28,7 +29,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($dogUser);
         $manager->flush();
-
+        $this->addReference(self::USER_REFERENCE, $dogUser);
 
         // Admin User
         $dogAdmin = new Dog();
@@ -40,5 +41,6 @@ class AppFixtures extends Fixture
 
         $manager->persist($dogAdmin);
         $manager->flush();
+        $this->addReference(self::ADMIN_REFERENCE, $dogAdmin);
     }
 }
