@@ -10,6 +10,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Zenstruck\Messenger\Test\InteractsWithMessenger;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBus;
 
 class ActivityEventHandlerTest extends KernelTestCase
@@ -29,8 +30,7 @@ class ActivityEventHandlerTest extends KernelTestCase
         $dog = (static::getContainer()->get(DogRepository::class))->findOneBy(['username' => 'testUser']);
         $post = (static::getContainer()->get(PostRepository::class))->find(2);
 
-        $this->bus->dispatch(new CreatePostEvent($dog, $post));
-
-        $this->messenger('sync')->queue()->assertCount(1);
+        $this->messenger('test')->send(Envelope::wrap(new CreatePostEvent($dog, $post)));
+        $this->messenger('test')->dispatched()->assertContains(CreatePostEvent::class, 1);
     }
 }

@@ -1,20 +1,10 @@
 framework:
     messenger:
-        failure_transport: failed
-
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async:
-                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
-                options:
-                    use_notify: true
-                    check_delayed_interval: 60000
-                retry_strategy:
-                    max_retries: 3
-                    multiplier: 2
-            failed: 'doctrine://default?queue_name=failed'
-
-            sync: 'test://'
+            async: 'sync://'
+            sync: 'sync://'
+            test: test://
 
         routing:
             Symfony\Component\Mailer\Messenger\SendEmailMessage: async
@@ -23,3 +13,9 @@ framework:
 
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
+
+# when@test:
+#     framework:
+#         messenger:
+#             transports:
+#                 async: 'test://'
