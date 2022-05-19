@@ -2,6 +2,7 @@
 
 namespace App\Tests\EventHandlers;
 
+use App\Domain\ActivityTypeEnum;
 use App\Repository\DogRepository;
 use App\Repository\PostRepository;
 use App\Message\ActivityEvents\CreatePostEvent;
@@ -30,7 +31,9 @@ class ActivityEventHandlerTest extends KernelTestCase
         $dog = (static::getContainer()->get(DogRepository::class))->findOneBy(['username' => 'testUser']);
         $post = (static::getContainer()->get(PostRepository::class))->find(2);
 
-        $this->messenger('test')->send(Envelope::wrap(new CreatePostEvent($dog, $post)));
-        $this->messenger('test')->dispatched()->assertContains(CreatePostEvent::class, 1);
+        $this->messenger('async')->send(Envelope::wrap(new CreatePostEvent($dog, $post)));
+        $dispatched =  $this->messenger('async')->dispatched();
+
+        $dispatched->assertContains(CreatePostEvent::class, 1);
     }
 }
