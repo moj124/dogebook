@@ -24,4 +24,6 @@ abstract class BaseEvent
     {
         return $this->content;
     }
+
+    abstract function handle(): void;
 }

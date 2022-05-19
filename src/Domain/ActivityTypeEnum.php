@@ -2,7 +2,9 @@
 
 namespace App\Domain;
 
-class ActvityTypeEnum 
+use MyCLabs\Enum\Enum;
+
+final class ActvityTypeEnum extends Enum
 {
-    public const CREATE_POST = 'Post created';
+    private const CREATE_POST = 'Post created';
 }

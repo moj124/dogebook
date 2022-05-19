@@ -12,8 +12,13 @@ final class CreatePostEvent extends BaseEvent
     public function __construct(Dog $dog, Post $post)
     {
         $this->dog = $dog;
-        $this->content = ActivityTypeEnum::CREATE_POST;
-        $this->type = 
-            "{$dog->getUserIdentifier} created a post with the body {$post->getPostText}";
+        $this->type = "test";
+        $this->content =
+            "{$dog->getUserIdentifier()} created a post with the body {$post->getPostText()}";
+    }
+
+    public function handle(): void
+    {
+        var_dump($this->content);
     }
 }
