@@ -31,8 +31,8 @@ class ActivityEventHandlerTest extends KernelTestCase
         $dog = (static::getContainer()->get(DogRepository::class))->findOneBy(['username' => 'testUser']);
         $post = (static::getContainer()->get(PostRepository::class))->find(2);
 
-        $this->messenger('async')->send(Envelope::wrap(new CreatePostEvent($dog, $post)));
-        $dispatched =  $this->messenger('async')->dispatched();
+        $this->messenger()->send(Envelope::wrap(new CreatePostEvent($dog, $post)));
+        $dispatched =  $this->messenger()->dispatched();
 
         $dispatched->assertContains(CreatePostEvent::class, 1);
     }

@@ -6,9 +6,9 @@ use App\Entity\Dog;
 
 abstract class BaseEvent
 {
-    private Dog $dog;
-    private string $type;
-    private string $content;
+    protected Dog $dog;
+    protected string $type;
+    protected string $content;
 
     public function getDog(): Dog
     {

@@ -19,6 +19,8 @@ final class CreatePostEvent extends BaseEvent
 
     public function handle(): void
     {
+        // create notification of type
+        // save it
         var_dump($this->type, $this->content);
     }
 }
