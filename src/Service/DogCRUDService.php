@@ -41,4 +41,8 @@ class DogCRUDService
     {
         return $this->postRepository->findAllPostsByDog($dog);
     }
+
+    public function getDogNiceName(Dog $dogUser): string {
+        return ucwords($dogUser->getUserIdentifier());
+    }
 }

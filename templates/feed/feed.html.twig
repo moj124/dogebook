@@ -1,8 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="bg-white w-100"></div>
+    <div class="p-3 bg-white w-100 rounded my-3 pb-5">
+        <div class="mb-3">
+            <strong>{{ currentDogUser }}</strong>
+        </div>
+        <a href="/add-post" type="button" class="w-100 border border-dark rounded feed__add_post">+</a>
+    </div>
     {% for post in posts %}
-        <div class="bg-white w-100">{{ post.postText }} <strong>Author: {{ post.dog.username }}</strong></div>
+    <div class="pr-3 pt-3 pb-2 bg-white w-100 my-3">
+        <div class="mb-3 feed__post_meta">
+            <strong>{{ post.dog.username }}</strong>
+        </div>
+        <p class="feed__post_body">{{ post.postText }}</p>
+        <div>
+            <div>
+                <a href="/add-comment" class="p-1 rounded feed__add_comment">Comment</a>
+                <!-- <a href="">+</a> -->
+            </div>
+            <!-- <a href="">
+                <div>
+
+                </div>
+            </a> -->
+        </div>
+    </div>
     {% endfor %}
 {% endblock %} 
