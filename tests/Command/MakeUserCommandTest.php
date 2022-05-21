@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 
 class MakeUserCommandTest extends KernelTestCase
 {
-    public function testSomething(): void
+    public function testCanCreateAUserWithCommand(): void
     {
         $kernel = self::bootKernel();
         $application = new Application($kernel);

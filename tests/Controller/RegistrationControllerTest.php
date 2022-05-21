@@ -5,25 +5,31 @@ namespace App\Tests\Controller;
 use App\Repository\DogRepository;
 use App\Service\DogCRUDService;
 use App\Service\DogImageService;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RegistrationControllerTest extends WebTestCase
 {
+    private KernelBrowser $client;
+    private DogRepository $dogRepo;
+
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
     public function testItCanGetTheRegisterFormView(): void
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/register');
+        $crawler = $this->client->request('GET', '/register');
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('form');
+        // we could also assert inputs here. Not a big thing, but would make this test more meaningful.
     }
 
-    public function testItCanSubmitAndCreateAUser(): void
+    public function testUsersCanRegister(): void
     {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/register');
-
-        $dogRepo = static::getContainer()->get(DogRepository::class);
+        $crawler = $this->client->request('GET', '/register');
         
         $registerButton = $crawler->selectButton('Register');
         $form = $registerButton->form([
@@ -32,10 +38,16 @@ class RegistrationControllerTest extends WebTestCase
             'registration_form[agreeTerms]' => 1
         ]);
 
-        $crawler = $client->submit($form);
-        $newDog = $dogRepo->findBy(['username' => 'test123'])[0];
+        $this->client->submit($form);
+        $newDog = $this->dogRepo->findBy(['username' => 'test123'])[0];
         
         $this->assertTrue($newDog->getUserIdentifier() === 'test123');
-        $client->followRedirects(true);
     }
+
+    public function testUsersCanLogIn(): void
+    {
+        // Should be straightforward given that we have fixture data
+    }
+
+    // I wouldn't work on other auth stuff tbh. Let's focus on getting a working project!!
 }

@@ -7,10 +7,16 @@ use App\Service\DogImageService;
 
 class HomeControllerTest extends WebTestCase
 {
-    public function testGETHomeLandingPage(): void
+    private $client;
+
+    public function setUp(): void
     {
-        $client = static::createClient();
-        $client->request('GET', '/');
+        $this->client = static::createClient();
+    }
+
+    public function testItServesLandingPage(): void
+    {
+        $this->client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Welcome to Dogebook');
@@ -27,8 +33,6 @@ class HomeControllerTest extends WebTestCase
      */
     public function testImageServiceGetsRandomImageStringURLMocked(): void
     {
-        $client = static::createClient();
-
         /**
          * As with the stubbed version, we need to create the mock. Under the hood, funnily enough, mocks
          * and stubs are basically the same introspect on the method createMock to prove it.
@@ -56,6 +60,18 @@ class HomeControllerTest extends WebTestCase
          * We can see that this test passes. Note that I am not looking for the return value in this test.
          * Mocks often return garbage data
          */
-        $client->request('GET', '/');
+        $this->client->request('GET', '/home');
+        $this->client->followRedirects();
+    }
+
+    public function testItServesTheAboutUsPage(): void
+    {
+        // Emulate the above minus the mocking (unless you want to serve a dog image here too?)
+    }
+
+
+    public function testItServesTheContactUsPage(): void
+    {
+        // Emulate the above minus the mocking (unless you want to serve a dog image here too?)
     }
 }

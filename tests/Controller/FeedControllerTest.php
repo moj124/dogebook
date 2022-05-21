@@ -12,21 +12,44 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class FeedControllerTest extends WebTestCase
 {
-    public function testItSubmitAndCreatePost(): void
-    {
-        $client = static::createClient();
-        $dogRepo = static::getContainer()->get(DogRepository::class);
-        $postRepo = static::getContainer()->get(PostRepository::class);
-        $testUser = $dogRepo->findOneByUsername('testUser');
-        $client->loginUser($testUser);
+    private $client;
+    private $dogRepo;
+    private $postRepo;
 
-        $crawler = $client->request('GET','/add-post');
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+        $this->dogRepo = static::getContainer()->get(DogRepository::class);
+        $this->postRepo = static::getContainer()->get(PostRepository::class);
+
+    }
+
+    public function testSubmitAndCreatePost(): void
+    {
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $this->client->loginUser($testUser);
+
+        $crawler = $this->client->request('GET','/add-post');
         $form = $crawler->selectButton('Save')->form();
         $form["post_form[post_text]"] = "testing post";
-        $crawler = $client->submit($form);
+        $crawler = $this->client->submit($form);
         
-        $newPost = $postRepo->findBy(['post_text' => 'testing post'])[0];
+        $newPost = $this->postRepo->findBy(['post_text' => 'testing post'])[0];
         $this->assertTrue($newPost->getPostText() === 'testing post');
-        $client->followRedirects(true);
+    }
+
+    public function testItCanEditAnExistingPost(): void
+    {
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $this->client->loginUser($testUser);
+
+        // We will need to find a new form here to do the edit
+        // Posts exist for the testUser already and their content is set. Just need to update it
+        // Should assert that the db was updated
+    }
+
+    public function testItCanDeleteAPost(): void
+    {
+        // Should be able to log in as a user and delete a post by id
     }
 }
