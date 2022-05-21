@@ -29,7 +29,7 @@ down:
 
 # starts the mailer, database images which runs in the an isolated environment
 up-all:
-	${DOCKER_COMPOSE} up -d mailer database
+	${DOCKER_COMPOSE} up -d database
 .PHONY: up-all
 
 # starts the symfony server in a isolated environment, with the default port 8000
