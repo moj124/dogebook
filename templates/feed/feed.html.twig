@@ -3,21 +3,26 @@
 {% block body %}
     <div class="p-3 bg-white w-100 rounded my-3 pb-5">
         <div class="mb-3">
-            <strong>{{ currentDogUser }}</strong>
+            <strong class="text-capitalize">{{ currentDogUser }}</strong>
         </div>
         <a href="/add-post" type="button" class="w-100 border border-dark rounded feed__add_post">+</a>
     </div>
     {% for post in posts %}
-    <div class="pr-3 pt-3 pb-2 bg-white w-100 my-3">
+    <div class="pe-2 pt-3 pb-2 bg-white w-100 my-3">
         <div class="mb-3 feed__post_meta">
-            <strong>{{ post.dog.username }}</strong>
+            <strong class="text-capitalize">{{ post.dog.username }}</strong>
         </div>
         <p class="feed__post_body">{{ post.postText }}</p>
-        <div>
+        <div class="d-flex justify-content-between align-items-end">
             <div>
                 <a href="/add-comment" class="p-1 rounded feed__add_comment">Comment</a>
                 <!-- <a href="">+</a> -->
             </div>
+            <button class="d-flex flex-row gap-2">
+
+                <p></p>
+                <img src="{{ asset('resources/images/thread.svg') }}">
+            </button>
             <!-- <a href="">
                 <div>
 
