@@ -72,9 +72,9 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
-    .configureFilenames({
-        images: '[path][name].[hash:8].[ext]',
-    })
+    // .configureFilenames({
+    //     images: '[path][name].[hash:8].[ext]',
+    // })
 ;
 
 module.exports = Encore.getWebpackConfig();
