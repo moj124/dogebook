@@ -3,6 +3,7 @@
 namespace App\Message;
 
 use App\Entity\Dog;
+use App\Repository\NotificationRepository;
 
 abstract class BaseEvent
 {
@@ -25,5 +26,5 @@ abstract class BaseEvent
         return $this->content;
     }
 
-    abstract function handle(): void;
+    abstract function handle(NotificationRepository $repo): void;
 }

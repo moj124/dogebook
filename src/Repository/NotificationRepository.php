@@ -39,14 +39,4 @@ class NotificationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-    public function findAllNotificationsForDog(Dog $dog): array
-    {
-        return $this->createQueryBuilder('q')
-            ->andWhere('q.dog_id = :dog_id')
-            ->setParameter('dog_id', $dog->getId())
-            ->orderBy('q.created_at', 'DESC')
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 }

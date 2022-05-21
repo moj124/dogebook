@@ -47,7 +47,6 @@ class FeedController extends AbstractController
         
         if($form->isSubmitted() && $form->isValid()) {
             $dogService->savePostForDog($dogUser, $post);
-            $postService->savePost($post);
             return $this->redirectToRoute('feed');
         }
 

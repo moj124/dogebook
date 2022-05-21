@@ -2,10 +2,12 @@
 
 namespace App\Message\ActivityEvents;
 
-use App\Domain\ActivityTypeEnum;
 use App\Entity\Dog;
 use App\Entity\Post;
 use App\Message\BaseEvent;
+use App\Entity\Notification;
+use App\Domain\ActivityTypeEnum;
+use App\Repository\NotificationRepository;
 
 final class CreatePostEvent extends BaseEvent
 {
@@ -17,10 +19,13 @@ final class CreatePostEvent extends BaseEvent
             "{$dog->getUserIdentifier()} created a post with the body {$post->getPostText()}";
     }
 
-    public function handle(): void
+    public function handle(NotificationRepository $notificationRepository): void
     {
-        // create notification of type
-        // save it
-        var_dump($this->type, $this->content);
+        $notification = (new Notification())
+            ->setDog($this->dog)
+            ->setType($this->type)
+            ->setContent($this->content);
+
+        $notificationRepository->add($notification, true);
     }
 }
