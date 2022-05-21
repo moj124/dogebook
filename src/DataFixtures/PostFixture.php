@@ -8,6 +8,8 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class PostFixture extends Fixture implements DependentFixtureInterface
 {
+    const POST_REFERENCE = "POST_";
+
     public function load(ObjectManager $manager)
     {
         $dog = $this->getReference(UserFixture::USER_REFERENCE);
@@ -19,6 +21,8 @@ class PostFixture extends Fixture implements DependentFixtureInterface
             
             $manager->persist($post);
             $manager->flush();
+
+            $this->addReference(self::POST_REFERENCE . $i, $post);
         }
     }
 

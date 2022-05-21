@@ -28,19 +28,19 @@ class UserFixture extends Fixture
         $dogUser->setPassword($password);
 
         $manager->persist($dogUser);
-        $manager->flush();
         $this->addReference(self::USER_REFERENCE, $dogUser);
+        $manager->flush();
 
         // Admin User
         $dogAdmin = new Dog();
         $dogAdmin->setUsername('testAdmin');
-        $dogAdmin->setRoles(['ROLE_ADMIN', $dogAdmin]);
+        $dogAdmin->setRoles(['ROLE_ADMIN']);
 
         $password = $this->hasher->hashPassword($dogAdmin, 'pass_1234');
         $dogAdmin->setPassword($password);
 
         $manager->persist($dogAdmin);
-        $manager->flush();
         $this->addReference(self::ADMIN_REFERENCE, $dogAdmin);
+        $manager->flush();
     }
 }

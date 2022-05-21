@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Dog;
 use App\Entity\Notification;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Notification>
@@ -39,28 +40,13 @@ class NotificationRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Notification[] Returns an array of Notification objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('n.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Notification
-//    {
-//        return $this->createQueryBuilder('n')
-//            ->andWhere('n.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function findAllNotificationsForDog(Dog $dog): array
+    {
+        return $this->createQueryBuilder('q')
+            ->andWhere('q.dog_id = :dog_id')
+            ->setParameter('dog_id', $dog->getId())
+            ->orderBy('q.created_at', 'DESC')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
