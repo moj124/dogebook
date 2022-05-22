@@ -56,10 +56,26 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $notifications;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Dog", mappedBy="myPack")
+     */
+    private $partOfPacks;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Dog", inversedBy="partOfPacks")
+     * @ORM\JoinTable(name="packs",
+     *      joinColumns={@ORM\joinColumn(name="dog_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\joinColumn(name="pack_dog_id", referencedColumnName="id")}
+     * )
+     */
+    private $myPack;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
         $this->notifications = new ArrayCollection();
+        $this->myPack = new ArrayCollection();
+        $this->partOfPacks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,6 +219,36 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
                 $notification->setDog(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPartOfPacks()
+    {
+        return $this->partOfPacks;
+    }
+
+    public function setPartOfPacks($partOfPacks): self
+    {
+        $this->partOfPacks = $partOfPacks;
+
+        return $this;
+    }
+
+    /**
+     * Get joinColumns={@ORM\joinColumn(name="dog_id", referencedColumnName="id)},
+     */
+    public function getMyPack()
+    {
+        return $this->myPack;
+    }
+
+    /**
+     * Set joinColumns={@ORM\joinColumn(name="dog_id", referencedColumnName="id)},
+     */
+    public function setMyPack($myPack): self
+    {
+        $this->myPack = $myPack;
 
         return $this;
     }
