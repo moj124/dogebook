@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b2f885178e9a5d74e7a62499758f876",
+    "content-hash": "235b3ecfd5e31ae0b76811d8cf8b8c50",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1686,6 +1686,62 @@
                 "wiki": "https://github.com/Atlantic18/DoctrineExtensions/tree/main/doc"
             },
             "time": "2022-05-17T06:58:52+00:00"
+        },
+        {
+            "name": "lagdo/symfony-facades",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lagdo/symfony-facades.git",
+                "reference": "efd15c68a03e650ea008b6afaf6684ffd8947609"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lagdo/symfony-facades/zipball/efd15c68a03e650ea008b6afaf6684ffd8947609",
+                "reference": "efd15c68a03e650ea008b6afaf6684ffd8947609",
+                "shasum": ""
+            },
+            "require": {
+                "psr/container": ">=1.0.0",
+                "symfony/framework-bundle": "4.*|5.*"
+            },
+            "require-dev": {
+                "nyholm/symfony-bundle-test": "^1.8",
+                "php-coveralls/php-coveralls": "^2.4",
+                "phpunit/phpcov": "^8.2",
+                "phpunit/phpunit": "^9.5",
+                "symfony/phpunit-bridge": "^4.4",
+                "symfony/test-pack": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Lagdo\\Symfony\\Facades\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Thierry Feuzeu"
+                }
+            ],
+            "description": "Call Symfony services using facades.",
+            "homepage": "https://github.com/lagdo/symfony-facades",
+            "keywords": [
+                "facades",
+                "framework",
+                "php",
+                "services",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/lagdo/symfony-facades/issues",
+                "source": "https://github.com/lagdo/symfony-facades"
+            },
+            "time": "2021-10-25T16:51:50+00:00"
         },
         {
             "name": "laminas/laminas-code",

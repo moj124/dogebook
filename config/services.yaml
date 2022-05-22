@@ -27,6 +27,14 @@ services:
         calls:
             - [ setAnnotationReader, [ '@annotation_reader' ] ]
 
+    lagdo.facades.service_locator:
+        public: true
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            -
+                Psr\Log\LoggerInterface: '@logger'
+
     App\MessageHandler\ActivityEventHandler:
         tags:
             -

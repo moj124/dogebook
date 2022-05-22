@@ -116,6 +116,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.7.0"
     },
+    "lagdo/symfony-facades": {
+        "version": "v1.1.0"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
     },

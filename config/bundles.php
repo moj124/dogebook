@@ -19,4 +19,5 @@ return [
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
     Liip\TestFixturesBundle\LiipTestFixturesBundle::class => ['test' => true],
     Zenstruck\Messenger\Test\ZenstruckMessengerTestBundle::class => ['test' => true],
+    Lagdo\Symfony\Facades\FacadesBundle::class => ['all' => true],
 ];

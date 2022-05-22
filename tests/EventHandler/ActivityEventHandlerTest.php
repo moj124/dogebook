@@ -53,6 +53,7 @@ class ActivityEventHandlerTest extends KernelTestCase
         $notification = $this->notRepo->findOneBy(['dog' => $dog->getId()], ['created_at' => 'DESC']);
 
         $this->assertEquals($dog->getId(), $notification->getDog()->getId());
+        $this->assertStringContainsString('testUser', $notification->getContent());
     }
 
     public function testItCanDispatchAddFriendMessages(): void

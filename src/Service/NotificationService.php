@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Entity\Dog;
 use App\Repository\NotificationRepository;
 
-class NotificationsService 
+class NotificationService 
 {
     private NotificationRepository $notificationRepo;
 
