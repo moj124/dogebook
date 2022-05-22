@@ -42,5 +42,20 @@ class UserFixture extends Fixture
         $manager->persist($dogAdmin);
         $this->addReference(self::ADMIN_REFERENCE, $dogAdmin);
         $manager->flush();
+
+        // Friend group
+        $dog1 = (new Dog())
+            ->setUsername('testUser1')
+            ->setRoles(['ROLE_USER']);
+        $password = $this->hasher->hashPassword($dog1, 'pass_1234');
+        $dog1->setPassword($password);
+        $dog1->setPartOfPacks($dogUser);
+
+        $dog2 = (new Dog())
+            ->setUsername('testUser2')
+            ->setRoles(['ROLE_USER']);
+        $password = $this->hasher->hashPassword($dog2, 'pass_1234');
+        $dog2->setPassword($password);
+        $dog2->setPartOfPacks($dogUser);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * Dog
@@ -228,9 +228,12 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->partOfPacks;
     }
 
-    public function setPartOfPacks($partOfPacks): self
+    public function setPartOfPacks(Dog $dog): self
     {
-        $this->partOfPacks = $partOfPacks;
+        if (!$this->partOfPacks->contains($dog)) {
+            $this->getPartOfPacks()->add($dog);
+            $dog->getMyPack()->add($this);
+        }
 
         return $this;
     }
@@ -246,9 +249,12 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Set joinColumns={@ORM\joinColumn(name="dog_id", referencedColumnName="id)},
      */
-    public function setMyPack($myPack): self
+    public function setMyPack(Dog $dog): self
     {
-        $this->myPack = $myPack;
+        if (!$this->myPack->contains($dog)) {
+            $this->getMyPack()->add($dog);
+            $dog->getPartOfPacks()->add($this);
+        }
 
         return $this;
     }
