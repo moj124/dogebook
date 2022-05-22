@@ -50,6 +50,8 @@ class UserFixture extends Fixture
         $password = $this->hasher->hashPassword($dog1, 'pass_1234');
         $dog1->setPassword($password);
         $dog1->setPartOfPacks($dogUser);
+        $dogUser->setPartOfPacks($dog1);
+        $manager->persist($dog1);
 
         $dog2 = (new Dog())
             ->setUsername('testUser2')
@@ -57,5 +59,8 @@ class UserFixture extends Fixture
         $password = $this->hasher->hashPassword($dog2, 'pass_1234');
         $dog2->setPassword($password);
         $dog2->setPartOfPacks($dogUser);
+        $dogUser->setPartOfPacks($dog2);
+        $manager->persist($dog2);
+        $manager->flush();
     }
 }

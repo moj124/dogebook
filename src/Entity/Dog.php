@@ -64,8 +64,8 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\ManyToMany(targetEntity="Dog", inversedBy="partOfPacks")
      * @ORM\JoinTable(name="packs",
-     *      joinColumns={@ORM\joinColumn(name="dog_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\joinColumn(name="pack_dog_id", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="dog_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="pack_dog_id", referencedColumnName="id")}
      * )
      */
     private $myPack;
