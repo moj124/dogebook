@@ -6,14 +6,9 @@ use Carbon\Carbon;
 use App\Message\BaseEvent;
 use App\Domain\Facade\Cache;
 use App\Service\PackService;
-use Lagdo\Symfony\Facades\Log;
 use App\Repository\DogRepository;
-use Symfony\Component\Messenger\Envelope;
-use App\MessageHandler\ActivityEventHandler;
-use App\Message\ActivityEvents\FriendAddedEvent;
-use Symfony\Contracts\Cache\TagAwareCacheInterface;
-use Zenstruck\Messenger\Test\InteractsWithMessenger;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Messenger\Test\InteractsWithMessenger;
 
 class PackServiceTest extends KernelTestCase
 {

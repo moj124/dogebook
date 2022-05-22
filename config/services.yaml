@@ -44,3 +44,7 @@ services:
             -
                 name: messenger.message_handler
                 handles: App\Message\ActivityEvents\CreatePostEvent
+            -
+                name: messenger.message_handler
+                handles: App\Message\ActivityEvents\FriendAddedEvent
+            
