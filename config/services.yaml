@@ -19,6 +19,10 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
+    # Not best practise. Remove once DI into a controller action.
+    App\Service\PackService:
+        public: true
 
     gedmo.listener.timestampable:
         class: Gedmo\Timestampable\TimestampableListener

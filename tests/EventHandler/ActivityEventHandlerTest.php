@@ -36,7 +36,7 @@ class ActivityEventHandlerTest extends KernelTestCase
         $event = new CreatePostEvent($dog, $post);
 
         $this->dispatchEventForTest($event);
-        $dispatched =  $this->messenger()->dispatched();
+        $dispatched = $this->messenger()->dispatched();
 
         $dispatched->assertContains(CreatePostEvent::class, 1);
     }
@@ -58,7 +58,8 @@ class ActivityEventHandlerTest extends KernelTestCase
 
     public function testItCanDispatchAddFriendMessages(): void
     {
-        
+        // Have a go at writing this test. Should also add another to confirm notification is created too
+        // Effect of add friend is pinned in PackServiceTest so no need to verify if data exists
     }
 
     private function dispatchEventForTest(BaseEvent $event): void

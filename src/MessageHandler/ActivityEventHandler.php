@@ -7,7 +7,7 @@ use Lagdo\Symfony\Facades\Log;
 use App\Repository\NotificationRepository;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class ActivityEventHandler implements MessageHandlerInterface
+class ActivityEventHandler implements MessageHandlerInterface
 {
     private NotificationRepository $notRepo;
 
