@@ -39,4 +39,11 @@ class NotificationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAllNotificationsForDog(Dog $dog): array
+    {
+        return $this->findBy([
+            'dog_id' => $dog->getMyPack()->getValues()
+        ]);
+    }
 }
