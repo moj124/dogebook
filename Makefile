@@ -38,7 +38,8 @@ serve:
 	${SYMFONY_BIN} serve -d
 .PHONY: serve
 
-fe:
+fe-install:
+	${YARN} install
 	${YARN} build
 .PHONY: fe
 
