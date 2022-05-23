@@ -2,8 +2,9 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Domain\Facade\Cache;
 use App\Service\DogImageService;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class HomeControllerTest extends WebTestCase
 {
@@ -16,6 +17,7 @@ class HomeControllerTest extends WebTestCase
 
     public function testItServesLandingPage(): void
     {
+        Cache::clear();
         $this->client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
@@ -32,12 +34,20 @@ class HomeControllerTest extends WebTestCase
      *  
      */
     public function testImageServiceGetsRandomImageStringURLMocked(): void
-    {
+    {   
+        /**
+         * Caching breaks this test. Might be worth looking for a way to have a test specific cache as this is 
+         * janky AF. We're abusing the facade too much here I think.
+         */
+        Cache::clear();
+
         /**
          * As with the stubbed version, we need to create the mock. Under the hood, funnily enough, mocks
          * and stubs are basically the same introspect on the method createMock to prove it.
          */
-        $mockedImageService = $this->createMock(DogImageService::class);
+        $mockedImageService = $this->getMockBuilder(DogImageService::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         /**
          * The difference between mocks and stubs is in their configuration. A mock is designed to detect

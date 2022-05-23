@@ -43,3 +43,6 @@ serve:
 # first remove all docker containers if still running start up mailer, database images
 dev: down up-all serve
 .PHONY: dev
+
+check: update down up-all tests
+.PHONY: check

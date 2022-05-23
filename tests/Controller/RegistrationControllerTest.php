@@ -16,6 +16,7 @@ class RegistrationControllerTest extends WebTestCase
     public function setUp(): void
     {
         $this->client = static::createClient();
+        $this->dogRepo = static::getContainer()->get(DogRepository::class);
     }
 
     public function testItCanGetTheRegisterFormView(): void
