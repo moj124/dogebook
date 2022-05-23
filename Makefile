@@ -3,6 +3,7 @@ COMPOSE ?= composer
 DOCKER_COMPOSE ?= docker-compose
 DOCKER_RUN ?= ${DOCKER_COMPOSE} run 
 SYMFONY_BIN ?= symfony
+YARN ?= yarn
 
 # PHONY sets a virtual target when running Makefile commands, avoids targetting real files!
 # -----------------------------------------------------------------------------------------------
@@ -37,6 +38,10 @@ serve:
 	${SYMFONY_BIN} serve -d
 .PHONY: serve
 
+fe:
+	${YARN} build
+.PHONY fe
+
 # Useful aliases
 # -----------------------------------------------------------------------------------------------
 
@@ -44,5 +49,5 @@ serve:
 dev: down up-all serve
 .PHONY: dev
 
-check: update down up-all tests
+check: update down fe up-all tests down
 .PHONY: check
