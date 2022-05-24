@@ -2,6 +2,7 @@
 
 namespace App\Tests\Service;
 
+use App\Domain\Facade\Cache;
 use App\Service\DogImageService;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -25,6 +26,7 @@ class DogImageServiceTest extends KernelTestCase {
      */
     public function testImageServiceGetsRandomImageStringURL(): void
     {
+        Cache::clear();
         $imageService = static::getContainer()->get(DogImageService::class);
 
         $response = $imageService->getRandomDogImageString();
@@ -40,6 +42,7 @@ class DogImageServiceTest extends KernelTestCase {
      */
     public function testImageServiceGetsRandomImageStringURLStubbed(): void
     {
+        Cache::clear();
         /**
          * Instead of getting the service container, we get the class and create stub with it
          * Because the class details the methods and 'shape' of the created object, creating the

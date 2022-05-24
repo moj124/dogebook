@@ -90,4 +90,18 @@ class DogRepository extends ServiceEntityRepository implements PasswordUpgraderI
         ;
     }
     */
+
+    public function getDogsPack(Dog $dog): array
+    {
+        return $this->findBy([
+            'id' => $dog->getMyPack()->getValues()
+        ]);
+    }
+
+    public function getPacksDogIsIn(Dog $dog): array
+    {
+        return $this->findBy([
+            'id' => $dog->getPartOfPacks()->getValues()
+        ]);
+    }
 }

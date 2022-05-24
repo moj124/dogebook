@@ -116,14 +116,26 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.7.0"
     },
+    "lagdo/symfony-facades": {
+        "version": "v1.1.0"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "liip/test-fixtures-bundle": {
+        "version": "2.4.0"
     },
     "monolog/monolog": {
         "version": "2.3.5"
     },
     "myclabs/deep-copy": {
         "version": "1.11.0"
+    },
+    "myclabs/php-enum": {
+        "version": "1.8.3"
+    },
+    "nesbot/carbon": {
+        "version": "2.58.0"
     },
     "nikic/php-parser": {
         "version": "v4.13.2"
@@ -678,5 +690,11 @@
     },
     "webmozart/assert": {
         "version": "1.10.0"
+    },
+    "zenstruck/assert": {
+        "version": "v1.0.1"
+    },
+    "zenstruck/messenger-test": {
+        "version": "v1.4.1"
     }
 }

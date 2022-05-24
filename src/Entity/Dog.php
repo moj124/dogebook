@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * Dog
@@ -51,9 +51,31 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $posts;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Notification::class, mappedBy="dog")
+     */
+    private $notifications;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Dog", mappedBy="myPack")
+     */
+    private $partOfPacks;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Dog", inversedBy="partOfPacks")
+     * @ORM\JoinTable(name="packs",
+     *      joinColumns={@ORM\JoinColumn(name="dog_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="pack_dog_id", referencedColumnName="id")}
+     * )
+     */
+    private $myPack;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
+        $this->myPack = new ArrayCollection();
+        $this->partOfPacks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,6 +174,7 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->posts->contains($post)) {
             $this->posts[] = $post;
+            $post->setDog($this);
         }
 
         return $this;
@@ -160,10 +183,77 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
     public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {
+            $this->posts->removeElement($post);
             // set the owning side to null (unless already changed)
             if ($post->getDog() === $this) {
                 $post->setDog(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications[] = $notification;
+            $notification->setDog($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getDog() === $this) {
+                $notification->setDog(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPartOfPacks()
+    {
+        return $this->partOfPacks;
+    }
+
+    public function setPartOfPacks(Dog $dog): self
+    {
+        if (!$this->partOfPacks->contains($dog)) {
+            $this->getPartOfPacks()->add($dog);
+            $dog->getMyPack()->add($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get joinColumns={@ORM\joinColumn(name="dog_id", referencedColumnName="id)},
+     */
+    public function getMyPack()
+    {
+        return $this->myPack;
+    }
+
+    /**
+     * Set joinColumns={@ORM\joinColumn(name="dog_id", referencedColumnName="id)},
+     */
+    public function setMyPack(Dog $dog): self
+    {
+        if (!$this->myPack->contains($dog)) {
+            $this->getMyPack()->add($dog);
+            $dog->getPartOfPacks()->add($this);
         }
 
         return $this;

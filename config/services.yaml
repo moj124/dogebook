@@ -19,6 +19,32 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    
+    # Not best practise. Remove once DI into a controller action.
+    App\Service\PackService:
+        public: true
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    gedmo.listener.timestampable:
+        class: Gedmo\Timestampable\TimestampableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ '@annotation_reader' ] ]
+
+    lagdo.facades.service_locator:
+        public: true
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: ['container.service_locator']
+        arguments:
+            -
+                Psr\Log\LoggerInterface: '@logger'
+
+    App\MessageHandler\ActivityEventHandler:
+        tags:
+            -
+                name: messenger.message_handler
+                handles: App\Message\ActivityEvents\CreatePostEvent
+            -
+                name: messenger.message_handler
+                handles: App\Message\ActivityEvents\FriendAddedEvent
+            
