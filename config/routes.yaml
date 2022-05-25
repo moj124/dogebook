@@ -43,6 +43,16 @@ add_post:
    controller: App\Controller\FeedController::createPost
    methods: POST
 
+form_comment:
+   path: /add-comment
+   controller: App\Controller\FeedController::createComment
+   methods: GET
+
+add_comment:
+   path: /add-comment
+   controller: App\Controller\FeedController::createComment
+   methods: POST
+
 profile:
    path: /profile
    controller: App\Controller\ProfileController::index
