@@ -9,6 +9,7 @@ use App\Service\PostCRUDService;
 use App\Service\DogCRUDService;
 use App\Repository\PostRepository;
 use App\Form\PostFormType;
+use App\Form\CommentFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +38,7 @@ class FeedController extends AbstractController
         );
     }
 
-    public function addComment(Request $request, PostCRUDService $postService) : Response
+    public function createComment(Request $request, PostCRUDService $postService) : Response
     {
         $comment = new Comment();
 
@@ -47,7 +48,8 @@ class FeedController extends AbstractController
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
-            $postService->saveCommentForPost($dogUser, $comment);
+
+            // $postService->saveCommentForPost($dogUser, $comment, $post);
             return $this->redirectToRoute('feed');
         }
 
