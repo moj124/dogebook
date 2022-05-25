@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 
+use App\Entity\Comment;
 use App\Service\PostCRUDService;
 use App\Service\DogCRUDService;
 use App\Repository\PostRepository;
@@ -36,12 +37,27 @@ class FeedController extends AbstractController
         );
     }
 
-    // public function addComment(DogCRUDService $dogService, PostRepository $postRepository) : Response
-    // {
+    public function addComment(Request $request, PostCRUDService $postService) : Response
+    {
+        $comment = new Comment();
 
-    // }
+        $form = $this->createForm(CommentFormType::class, $comment);
 
-    public function createPost(Request $request, PostCRUDService $postService, DogCRUDService $dogService): Response 
+        $dogUser = $this->getUser();
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()) {
+            $postService->saveCommentForPost($dogUser, $comment);
+            return $this->redirectToRoute('feed');
+        }
+
+        // Rendering the view if the form has not been submitted
+        return $this->render('feed/comment/add-comment.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function createPost(Request $request, DogCRUDService $dogService): Response 
     {
         $post = new Post();
 
