@@ -1906,6 +1906,7 @@
                 }
             ],
             "time": "2022-05-10T09:36:00+00:00"
+<<<<<<< Updated upstream
         },
         {
             "name": "myclabs/php-enum",
@@ -2063,6 +2064,8 @@
                 }
             ],
             "time": "2022-04-25T19:31:17+00:00"
+=======
+>>>>>>> Stashed changes
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3258,6 +3261,7 @@
         },
         {
             "name": "symfony/deprecation-contracts",
+<<<<<<< Updated upstream
             "version": "v3.0.1",
             "source": {
                 "type": "git",
@@ -3268,6 +3272,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/26954b3d62a6c5fd0ea8a2a00c0353a14978d05c",
                 "reference": "26954b3d62a6c5fd0ea8a2a00c0353a14978d05c",
+=======
+            "version": "v2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/deprecation-contracts.git",
+                "reference": "e8b495ea28c1d97b5e0c121748d6f9b53d075c66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/deprecation-contracts/zipball/e8b495ea28c1d97b5e0c121748d6f9b53d075c66",
+                "reference": "e8b495ea28c1d97b5e0c121748d6f9b53d075c66",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -3305,7 +3321,11 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
+<<<<<<< Updated upstream
                 "source": "https://github.com/symfony/deprecation-contracts/tree/v3.0.1"
+=======
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v2.5.1"
+>>>>>>> Stashed changes
             },
             "funding": [
                 {
@@ -3321,7 +3341,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2022-01-02T09:55:41+00:00"
+=======
+            "time": "2022-01-02T09:53:40+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "symfony/doctrine-bridge",
@@ -3742,6 +3766,7 @@
         },
         {
             "name": "symfony/event-dispatcher-contracts",
+<<<<<<< Updated upstream
             "version": "v3.0.1",
             "source": {
                 "type": "git",
@@ -3752,6 +3777,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/7bc61cc2db649b4637d331240c5346dcc7708051",
                 "reference": "7bc61cc2db649b4637d331240c5346dcc7708051",
+=======
+            "version": "v2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher-contracts.git",
+                "reference": "f98b54df6ad059855739db6fcbc2d36995283fe1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/f98b54df6ad059855739db6fcbc2d36995283fe1",
+                "reference": "f98b54df6ad059855739db6fcbc2d36995283fe1",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -3801,7 +3838,11 @@
                 "standards"
             ],
             "support": {
+<<<<<<< Updated upstream
                 "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v3.0.1"
+=======
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v2.5.1"
+>>>>>>> Stashed changes
             },
             "funding": [
                 {
@@ -3817,7 +3858,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2022-01-02T09:55:41+00:00"
+=======
+            "time": "2022-01-02T09:53:40+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "symfony/expression-language",
@@ -4011,6 +4056,7 @@
         },
         {
             "name": "symfony/flex",
+<<<<<<< Updated upstream
             "version": "v2.1.8",
             "source": {
                 "type": "git",
@@ -4021,6 +4067,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/flex/zipball/dcbe58c3fbafeaeb32f619bf94c3912c0c732b65",
                 "reference": "dcbe58c3fbafeaeb32f619bf94c3912c0c732b65",
+=======
+            "version": "v1.18.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/flex.git",
+                "reference": "e74319d17ed4edc5f27b9d24757e172930a7ebc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/e74319d17ed4edc5f27b9d24757e172930a7ebc4",
+                "reference": "e74319d17ed4edc5f27b9d24757e172930a7ebc4",
+>>>>>>> Stashed changes
                 "shasum": ""
             },
             "require": {
@@ -4056,7 +4114,11 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
+<<<<<<< Updated upstream
                 "source": "https://github.com/symfony/flex/tree/v2.1.8"
+=======
+                "source": "https://github.com/symfony/flex/tree/v1.18.7"
+>>>>>>> Stashed changes
             },
             "funding": [
                 {
@@ -4072,7 +4134,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< Updated upstream
             "time": "2022-05-02T10:23:41+00:00"
+=======
+            "time": "2022-05-02T10:18:23+00:00"
+>>>>>>> Stashed changes
         },
         {
             "name": "symfony/form",
