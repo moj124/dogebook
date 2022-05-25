@@ -36,6 +36,11 @@ class FeedController extends AbstractController
         );
     }
 
+    // public function addComment(DogCRUDService $dogService, PostRepository $postRepository) : Response
+    // {
+
+    // }
+
     public function createPost(Request $request, PostCRUDService $postService, DogCRUDService $dogService): Response 
     {
         $post = new Post();
