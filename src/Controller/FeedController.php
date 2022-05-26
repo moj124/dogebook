@@ -10,6 +10,7 @@ use App\Service\DogCRUDService;
 use App\Repository\PostRepository;
 use App\Form\PostFormType;
 use App\Form\CommentFormType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,18 +39,19 @@ class FeedController extends AbstractController
         );
     }
 
-    public function createComment(Request $request, PostCRUDService $postService) : Response
+    public function createComment(Request $request, EntityManagerInterface $em , Post $post) : Response
     {
         $comment = new Comment();
-
+        $comment->setPost($post);
         $form = $this->createForm(CommentFormType::class, $comment);
 
         $dogUser = $this->getUser();
+        $comment->setDog($dogUser);
         $form->handleRequest($request);
         
         if($form->isSubmitted() && $form->isValid()) {
-            dd("needs more work :)");
-            // $postService->saveCommentForPost($dogUser, $comment, $post);
+            $em->persist($comment);
+            $em->flush();
             return $this->redirectToRoute('feed');
         }
 

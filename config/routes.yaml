@@ -49,9 +49,9 @@ form_comment:
    methods: GET
 
 add_comment:
-   path: /add-comment
+   path: /post/{id}/add-comment
    controller: App\Controller\FeedController::createComment
-   methods: POST
+   methods: POST|GET
 
 profile:
    path: /profile
