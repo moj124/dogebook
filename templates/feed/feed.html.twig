@@ -15,7 +15,7 @@
         <p class="feed__post_body">{{ post.postText }}</p>
         <div class="d-flex justify-content-between align-items-end">
             <div>
-                <a href="/add-comment" class="p-1 rounded feed__add_comment">Comment</a>
+                <a href="{{ path('add_comment', { id:post.id }) }}" class="p-1 rounded feed__add_comment">Comment</a>
                 <!-- <a href="">+</a> -->
             </div>
             <button class="d-flex flex-row gap-2">
