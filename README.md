@@ -68,13 +68,31 @@ To add a global alias `symfony` to your system, run the below command. [Docs](ht
 brew install symfony-cli/tap/symfony-cli
 ```
 
+To add a node, I use NVM to manage the node versions:
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+```
+
+Then set your node to use version 12.0 via NVM
+
+```
+nvm install 12
+```
 ### Requirements
 - Docker: [www.docker.com/get-started](https://www.docker.com/get-started)
 - Composer: [getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md)
 - PHP: PHP@^7.4
 - Symfony: [symfony.com/doc/current/setup.html](https://symfony.com/doc/current/setup.html)
+- Node: node@^12.0
 ## Run
 ```
 make dev
+```
+
+Then run webpack to compile your `assests/` into `build/`:
+
+```
+yarn dev-server
 ```
 ## Git Workflow
