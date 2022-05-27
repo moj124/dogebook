@@ -8,6 +8,7 @@ use App\Entity\Comment;
 use App\Service\PostCRUDService;
 use App\Service\DogCRUDService;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use App\Form\PostFormType;
 use App\Form\CommentFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FeedController extends AbstractController
 {
-    public function index(DogCRUDService $dogService, PostRepository $postRepository): Response
+    public function index(DogCRUDService $dogService, PostRepository $postRepository, CommentRepository $commentRepository): Response
     {
         $dogUser = $this->getUser();
         $dogUsername = $dogUser->getUserIdentifier();
@@ -31,10 +32,13 @@ class FeedController extends AbstractController
         
         $posts = $postRepository->findAll();
 
+        $comments = $commentRepository->findAll();
+
         return $this->render('feed/feed.html.twig', 
         [
             'posts' => $posts,
             'currentDogUser' => $postAuthor,
+            'comments' => $comments,
             ]
         );
     }
