@@ -8,27 +8,39 @@
         <a href="/add-post" type="button" class="w-100 border border-dark rounded feed__add_post">+</a>
     </div>
     {% for post in posts %}
-    <div class="pe-2 pt-3 pb-2 bg-white w-100 my-3">
-        <div class="mb-3 feed__post_meta">
-            <strong class="text-capitalize">{{ post.dog.username }}</strong>
-        </div>
-        <p class="feed__post_body">{{ post.postText }}</p>
-        <div class="d-flex justify-content-between align-items-end">
-            <div>
-                <a href="/add-comment" class="p-1 rounded feed__add_comment">Comment</a>
-                <!-- <a href="">+</a> -->
+        <div class="pe-2 pt-3 pb-2 bg-white w-100 my-3">
+            <div class="mb-3 feed__post_meta">
+                <strong class="text-capitalize">{{ post.dog.username }}</strong>
             </div>
-            <button class="d-flex flex-row gap-2">
-
-                <p></p>
-                <img src="{{ asset('resources/images/thread.svg') }}">
-            </button>
-            <!-- <a href="">
+            <p class="feed__post_body">{{ post.postText }}</p>
+            <div class="d-flex justify-content-between align-items-end">
                 <div>
-
+                    <a href="{{ path('add_comment', { id:post.id }) }}" class="p-1 rounded feed__add_comment">Comment</a>
+                    <!-- <a href="">+</a> -->
                 </div>
-            </a> -->
+                <button class="d-flex flex-row gap-2">
+
+                    <p></p>
+                    <img src="{{ asset('resources/images/thread.svg') }}">
+                </button>
+                <!-- <a href="">
+                    <div>
+
+                    </div>
+                </a> -->
+            </div>
+            <div class="d-flex flex-column">
+                {% for comment in comments %}
+                    {% if comment.post.id is same as post.id %}
+                    <div class="feed_comment">
+                        <div class="mb-3 feed__comment_meta">
+                            <strong class="text-capitalize">{{ comment.dog.username }}</strong>
+                        </div>
+                        <p class="feed__post_body">{{ comment.commentText }}</p>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
     {% endfor %}
 {% endblock %} 
