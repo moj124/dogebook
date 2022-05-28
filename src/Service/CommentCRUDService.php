@@ -4,6 +4,8 @@ namespace App\Service;
 
 use App\Repository\CommentRepository;
 use App\Entity\Comment;
+use App\Entity\Dog;
+use App\Entity\Post;
 
 class CommentCRUDService 
 {
@@ -12,10 +14,5 @@ class CommentCRUDService
     public function __construct(CommentRepository $commentRepository)
     {
         $this->commentRepository = $commentRepository;
-    }
-
-    public function saveComment(Comment $comment): void
-    {   
-        $this->commentRepository->add($comment);
     }
 }
