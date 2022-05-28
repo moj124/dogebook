@@ -4,6 +4,9 @@ namespace App\Service;
 
 use App\Repository\PostRepository;
 use App\Entity\Post;
+use App\Entity\Comment;
+use App\Entity\Dog;
+
 
 class PostCRUDService 
 {
@@ -17,5 +20,12 @@ class PostCRUDService
     public function savePost(Post $post): void
     {   
         $this->postRepository->add($post);
+    }
+
+    public function addPostComment(Comment $comment, Dog $dogUser, Post $post): void
+    {   
+        $comment->setDog($dogUser);
+        $comment->setPost($post);
+        $this->commentRepository->add($comment);
     }
 }
