@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Repository\CommentRepository;
+use Symfony\Component\Form\FormInterface;
 use App\Entity\Comment;
 use App\Entity\Dog;
 use App\Entity\Post;
@@ -14,5 +15,25 @@ class CommentCRUDService
     public function __construct(CommentRepository $commentRepository)
     {
         $this->commentRepository = $commentRepository;
+    }
+
+    public function assignPost(Comment $comment, Post $post): void {
+        $comment->setPost($post);
+    }
+
+    public function assignDog(Comment $comment, Dog $dog): void {
+        $comment->setDog($dog);
+    }
+
+    public function handleAddComment(Comment $comment, Post $post, Dog $dog, FormInterface $form): bool
+    {
+        // is form posted in POST HTTP Response and is the form valid
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->assignPost($comment, $post);
+            $this->assignDog($comment, $dog);
+            $this->commentRepository->add($comment);
+            return true;
+        }
+        return false;
     }
 }

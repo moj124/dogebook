@@ -42,6 +42,10 @@ class DogCRUDService
         return $this->postRepository->findAllPostsByDog($dog);
     }
 
+    public function getAllFriendsPosts(){
+        return null;
+    }
+
     public function getDogNiceName(Dog $dogUser): string {
         return ucwords($dogUser->getUserIdentifier());
     }

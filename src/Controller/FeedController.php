@@ -7,6 +7,7 @@ use App\Entity\Post;
 use App\Entity\Comment;
 use App\Service\PostCRUDService;
 use App\Service\DogCRUDService;
+use App\Service\CommentCRUDService;
 use App\Repository\PostRepository;
 use App\Repository\CommentRepository;
 use App\Form\PostFormType;
@@ -30,6 +31,8 @@ class FeedController extends AbstractController
             return $this->redirectToRoute('add_post');
         }
         
+
+        // move this when you add a pack
         $posts = $postRepository->findAll();
 
         $comments = $commentRepository->findAll();
@@ -44,7 +47,7 @@ class FeedController extends AbstractController
         );
     }
 
-    public function createComment(Request $request, PostCRUDService $postService ,Post $post) : Response
+    public function createComment(Request $request, CommentCRUDService $commentService ,Post $post) : Response
     {
         $comment = new Comment();
 
@@ -54,8 +57,7 @@ class FeedController extends AbstractController
 
         $form->handleRequest($request);
         
-        if($form->isSubmitted() && $form->isValid()) {
-            $postService->addPostComment($comment, $dogUser, $post);
+        if($commentService->handleAddComment($comment, $post, $dogUser, $form)) {
             return $this->redirectToRoute('feed');
         }
 
