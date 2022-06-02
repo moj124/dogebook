@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Repository\CommentRepository;
+use Lagdo\Symfony\Facades\Log;
 use Symfony\Component\Form\FormInterface;
 use App\Entity\Comment;
 use App\Entity\Dog;
@@ -29,11 +30,19 @@ class CommentCRUDService
     {
         // is form posted in POST HTTP Response and is the form valid
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->assignPost($comment, $post);
             $this->assignDog($comment, $dog);
             $this->commentRepository->add($comment);
+
+            Log::info('CommentCRUDService@handleAddComment has added a comment', ['comment' => $comment, 'post' => $post, 'dog' => $dog]);
+
+
             return true;
         }
+
+        Log::info('CommentCRUDService@handleAddComment failed to add a comment', ['comment' => $comment, 'post' => $post, 'dog' => $dog]);
+
         return false;
     }
 }
