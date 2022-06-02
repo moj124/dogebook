@@ -44,3 +44,7 @@ a.feed__add_comment {
     text-align: center;
     background-color:  #454f6c;
 }
+
+.feed__post_form {
+    min-width: 500px;
+}
