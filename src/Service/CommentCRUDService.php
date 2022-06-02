@@ -18,6 +18,13 @@ class CommentCRUDService
         $this->commentRepository = $commentRepository;
     }
 
+    /**
+     * @return Comment[] 
+     */ 
+    public function getAllCommentsByPosts($posts): array {
+        return $this->commentRepository->findAllCommentsByPosts($posts);
+    }
+
     public function assignPost(Comment $comment, Post $post): void {
         $comment->setPost($post);
     }

@@ -22,6 +22,15 @@ class PostCRUDService
         $this->postRepository->add($post);
     }
 
+    /**
+    * @return Post[] Returns an array of Post objects
+    * @param Dog[] $dogs
+    */
+    public function getAllMyPackPosts(array $dogs): array
+    {
+        return $this->postRepository->findAllPostsByDogPack($dogs);
+    }
+
     public function addPostComment(Comment $comment, Dog $dogUser, Post $post): void
     {   
         $comment->setDog($dogUser);
