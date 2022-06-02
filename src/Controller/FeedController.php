@@ -36,8 +36,10 @@ class FeedController extends AbstractController
         }
         
         $myPack = $packService->getPack($dogUser);
+
+        $postsPack = $postService->getAllMyPackPosts($myPack);
         
-        $posts = $postService->getAllMyPackPosts($myPack);
+        array_push($postsPack, $posts);
 
         $comments = $commentService->getAllCommentsByPosts($posts);
 
