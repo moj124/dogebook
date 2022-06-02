@@ -47,8 +47,10 @@ class RegistrationControllerTest extends WebTestCase
 
     public function testUsersCanLogIn(): void
     {
-        // Should be straightforward given that we have fixture data
-    }
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $this->client->loginUser($testUser);
 
-    // I wouldn't work on other auth stuff tbh. Let's focus on getting a working project!!
+        $this->client->request('GET', '/feed');
+        $this->assertResponseIsSuccessful();
+    }
 }
