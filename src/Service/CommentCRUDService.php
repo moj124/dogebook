@@ -19,9 +19,10 @@ class CommentCRUDService
     }
 
     /**
+     * @paramter Comment[] $posts
      * @return Comment[] 
      */ 
-    public function getAllCommentsByPosts($posts): array {
+    public function getAllCommentsByPosts(array $posts): array {
         return $this->commentRepository->findAllCommentsByPosts($posts);
     }
 
