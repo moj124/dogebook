@@ -37,16 +37,44 @@ class DogCRUDService
      * @accepts Dog $dog
      * @return Post[]
      */
-    public function getAllPosts(Dog $dog): iterable
+    public function getAllPosts(Dog $dog): array
     {
         return $this->postRepository->findAllPostsByDog($dog);
     }
-
-    public function getAllFriendsPosts(){
-        return null;
+    
+    /**
+    * @return Dog[]
+    */
+    public function getAllDogs(): array{
+        return $this->dogRepository->findAll();
     }
 
-    public function getDogNiceName(Dog $dogUser): string {
+    public function getDogNiceName(Dog $dogUser): string
+    {
         return ucwords($dogUser->getUserIdentifier());
+    }
+
+    /**
+     * @paramter Dog[] $dogs
+     * @paramter Dog[] $myPack
+     * @return Dog[]
+     */
+    public function getDogsNotInPack(array $myPack, array $dogs): array
+    {
+        if(count($myPack) === 0 || count($dogs) === 0) {
+            return [];
+        }
+
+        $myPack = array_map(fn(Dog $dog): int => $dog->getId(), $myPack);
+
+        $otherDogUsers = [];
+
+        foreach ( $dogs as $dog) {
+            if (!in_array($dog->getId(),$myPack)) {
+                array_push($otherDogUsers,$dog);
+            }
+        }
+
+        return $otherDogUsers;
     }
 }
