@@ -7,10 +7,8 @@ use App\Entity\Comment;
 use App\Entity\Dog;
 use App\Service\DogCRUDService;
 use App\Service\CommentCRUDService;
+use App\Service\PostCRUDService;
 use App\Service\PackService;
-use App\Repository\PostRepository;
-use App\Repository\CommentRepository;
-use App\Repository\DogRepository;
 use App\Form\PostFormType;
 use App\Form\CommentFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,9 +19,8 @@ class FeedController extends AbstractController
 {
     public function index(
         DogCRUDService $dogService,
-        PostRepository $postRepository, 
-        CommentRepository $commentRepository, 
-        DogRepository $dogRepository, 
+        PostCRUDService $postService,
+        CommentCRUDService $commentService, 
         PackService $packService
         ): Response 
     {
@@ -32,29 +29,21 @@ class FeedController extends AbstractController
 
         $postAuthor = $dogService->getDogNiceName($dogUser);
 
-        $posts = $postRepository->findAllPostsByDog($dogUser);
+        $posts = $dogService->getAllPosts($dogUser);
 
         if(count($posts) === 0) {
             return $this->redirectToRoute('add_post');
         }
         
-
-        // move this when you add a pack
-        $posts = $postRepository->findAll();
-
-        $comments = $commentRepository->findAll();
-
         $myPack = $packService->getPack($dogUser);
-
-        // dd($myPack);
-        $dogs = $dogRepository->findAll();
-
-        // dd($dogs);
-        $otherDogUsers = array_udiff($dogs, $myPack, function(Dog $dog, Dog $packDog) {
-            return $dog->getId() !== $packDog->getId(); 
-        });
         
-        // dd($otherDogUsers);
+        $posts = $postService->getAllMyPackPosts($myPack);
+
+        $comments = $commentService->getAllCommentsByPosts($posts);
+
+        $dogs = $dogService->getAllDogs();
+
+        $otherDogUsers = $dogService->getDogsNotInPack($myPack, $dogs);
 
         return $this->render(
             'feed/feed.html.twig', 
