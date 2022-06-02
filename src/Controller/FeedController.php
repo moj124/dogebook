@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-
 use App\Entity\Comment;
-use App\Service\PostCRUDService;
+use App\Entity\Dog;
 use App\Service\DogCRUDService;
 use App\Service\CommentCRUDService;
+use App\Service\PackService;
 use App\Repository\PostRepository;
 use App\Repository\CommentRepository;
+use App\Repository\DogRepository;
 use App\Form\PostFormType;
 use App\Form\CommentFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +19,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FeedController extends AbstractController
 {
-    public function index(DogCRUDService $dogService, PostRepository $postRepository, CommentRepository $commentRepository): Response 
+    public function index(
+        DogCRUDService $dogService,
+        PostRepository $postRepository, 
+        CommentRepository $commentRepository, 
+        DogRepository $dogRepository, 
+        PackService $packService
+        ): Response 
     {
 
         $dogUser = $this->getUser();
@@ -37,14 +44,41 @@ class FeedController extends AbstractController
 
         $comments = $commentRepository->findAll();
 
+        $myPack = $packService->getPack($dogUser);
+
+        // dd($myPack);
+        $dogs = $dogRepository->findAll();
+
+        // dd($dogs);
+        $otherDogUsers = array_udiff($dogs, $myPack, function(Dog $dog, Dog $packDog) {
+            return $dog->getId() !== $packDog->getId(); 
+        });
+        
+        // dd($otherDogUsers);
+
         return $this->render(
             'feed/feed.html.twig', 
             [
                 'posts' => $posts,
-                'currentDogUser' => $postAuthor,
+                'currentDogUserNiceName' => $postAuthor,
+                'currentDogUser' => $dogUser,
                 'comments' => $comments,
+                'dogUsers' => $otherDogUsers,
+                'myPack' => $myPack
             ]
         );
+    }
+
+    public function addFriend(PackService $packService, Dog $dog): Response
+    {
+        $dogUser = $this->getUser();
+        $packService->addDogToPack($dogUser, $dog);
+        return $this->redirectToRoute('feed');
+    }
+
+    public function removeFriend(PackService $packService, Dog $dog): Response
+    {
+        return $this->redirectToRoute('feed');
     }
 
     public function createComment(Request $request, CommentCRUDService $commentService ,Post $post) : Response

@@ -48,6 +48,16 @@ add_comment:
    controller: App\Controller\FeedController::createComment
    methods: POST|GET
 
+add_friend:
+   path: /dog/{id}/add-friend
+   controller: App\Controller\FeedController::addFriend
+   methods: GET
+
+remove_friend:
+   path: /dog/{id}/remove-friend
+   controller: App\Controller\FeedController::removeFriend
+   methods: GET
+
 profile:
    path: /profile
    controller: App\Controller\ProfileController::index

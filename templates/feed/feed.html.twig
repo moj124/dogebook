@@ -1,46 +1,67 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="p-3 bg-white w-100 rounded my-3 pb-5">
-        <div class="mb-3">
-            <strong class="text-capitalize">{{ currentDogUser }}</strong>
-        </div>
-        <a href="/add-post" type="button" class="w-100 border border-dark rounded feed__add_post">+</a>
-    </div>
-    {% for post in posts %}
-        <div class="pe-2 pt-3 pb-2 bg-white w-100 my-3">
-            <div class="mb-3 feed__post_meta">
-                <strong class="text-capitalize">{{ post.dog.username }}</strong>
-            </div>
-            <p class="feed__post_body">{{ post.postText }}</p>
-            <div class="d-flex justify-content-between align-items-end">
-                <div>
-                    <a href="{{ path('add_comment', { id:post.id }) }}" class="p-1 rounded feed__add_comment">Comment</a>
-                    <!-- <a href="">+</a> -->
+    <div class="d-flex flex-row">
+        <div>
+            <div class="p-3 bg-white w-100 rounded my-3 pb-5">
+                <div class="mb-3">
+                    <strong class="text-capitalize">{{ currentDogUserNiceName }}</strong>
                 </div>
-                <button class="d-flex flex-row gap-2">
-
-                    <p></p>
-                    <img src="{{ asset('resources/images/thread.svg') }}">
-                </button>
-                <!-- <a href="">
-                    <div>
-
-                    </div>
-                </a> -->
+                <a href="/add-post" type="button" class="w-100 border border-dark rounded feed__add_post">+</a>
             </div>
-            <div class="d-flex flex-column">
-                {% for comment in comments %}
-                    {% if comment.post.id is same as post.id %}
-                    <div class="feed_comment">
-                        <div class="mb-3 feed__comment_meta">
-                            <strong class="text-capitalize">{{ comment.dog.username }}</strong>
+            {% for post in posts %}
+                <div class="pe-2 pt-3 pb-2 bg-white w-100 my-3">
+                    <div class="mb-3 feed__post_meta">
+                        <strong class="text-capitalize">{{ post.dog.username }}</strong>
+                    </div>
+                    <p class="feed__post_body">{{ post.postText }}</p>
+                    <div class="d-flex justify-content-between align-items-end">
+                        <div>
+                            <a href="{{ path('add_comment', { id:post.id }) }}" class="p-1 rounded feed__add_comment">Comment</a>
                         </div>
-                        <p class="feed__post_body">{{ comment.commentText }}</p>
+                        <button class="d-flex flex-row gap-2">
+        
+                            <p></p>
+                            <img src="{{ asset('resources/images/thread.svg') }}">
+                        </button>
                     </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
+                    <div class="d-flex flex-column">
+                        {% for comment in comments %}
+                            {% if comment.post.id is same as post.id %}
+                            <div class="feed_comment">
+                                <div class="mb-3 feed__comment_meta">
+                                    <strong class="text-capitalize">{{ comment.dog.username }}</strong>
+                                </div>
+                                <p class="feed__post_body">{{ comment.commentText }}</p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+        <div class="w-100">
+
+            <div>
+                <h4>My Pack</h4>
+                <div class="d-flex flex-column">
+                    {% for dog in myPack %}
+                        {% if dog.id is not same as currentDogUser.id %}
+                        <div>
+                            <strong class="text-capitalize">{{ dog.username }}</strong>
+                            <a href="{{ path('remove_friend', { id:dog.id }) }}" type="button" class="border border-dark rounded feed__form_button">remove</a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <br>
+            {% for dog in dogUsers %}
+                <div class="d-flex flex-column">
+                    <strong class="text-capitalize">{{ dog.username }}</strong>
+                    <a href="{{ path('add_friend', { id:dog.id }) }}" class="p-1 rounded feed__add_comment">Add Friend</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %} 
