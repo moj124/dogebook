@@ -41,20 +41,23 @@ class CommentRepository extends ServiceEntityRepository
     }
 
    /**
+    * @parameter Post[] $posts
     * @return Comment[] Returns an array of Comment objects
     */
-   public function findAllCommentsByPosts($posts): array
+   public function findAllCommentsByPosts(array $posts): array
    {
+        if(count($posts) === 0){
+            return [];
+        }
+
         $qb = $this->createQueryBuilder('c');
 
-        $posts = array_map(fn(Post $post): int => $post->getId(), $posts);
+        $posts = array_map(fn(Post $post) : int => $post->getId(), $posts);
 
-       return $qb->andWhere($qb->expr()->in('c.post',$posts))
+        return $qb->andWhere($qb->expr()->in("c.post", $posts))
            ->orderBy('c.id', 'ASC')
-           ->setMaxResults(10)
            ->getQuery()
-           ->getResult()
-       ;
+           ->getResult();
    }
 
 //    public function findOneBySomeField($value): ?Comment
