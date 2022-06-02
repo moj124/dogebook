@@ -56,15 +56,19 @@ class FeedControllerTest extends WebTestCase
         $this->assertTrue($newComment->getCommentText() === 'testing comment');
     }
 
-    // public function testAddDogToPack(): void
-    // {
+    public function testAddDogToPack(): void
+    {
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $this->client->loginUser($testUser);
 
-    // }
+        $testUserPack = $this->dogRepo->getDogsPack($testUser);
 
-    // public function testViewNonPackDogs(): void
-    // {
-
-    // }
+        $url = "/dog/{$testUser->getId()}/add-friend";
+        $this->client->request('GET', $url);
+        
+        $newTestUserPack = $this->dogRepo->getDogsPack($testUser);
+        $this->assertTrue((count($testUserPack) + 1) === count($newTestUserPack));
+    }
 
     // public function testItCanEditAnExistingPost(): void
     // {
