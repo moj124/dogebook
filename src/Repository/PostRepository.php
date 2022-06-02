@@ -46,19 +46,33 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Post[] Returns an array of Post objects
-    //  */
-    
-    public function findAllPostsByDog(Dog $dogUser)
+    /**
+    * @return Post[] Returns an array of Post objects
+    */
+    public function findAllPostsByDog(Dog $dog): array
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.dog = :val')
-            ->setParameter('val', $dogUser->getId())
+            ->setParameter('val', $dog)
             ->orderBy('p.id', 'ASC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+    }
+
+    /**
+    * @return Post[] Returns an array of Post objects
+    * @param Dog[] $dogs
+    */
+    public function findAllPostsByDogPack(array $dogs): array
+    {
+        $dogs = array_map(fn(Dog $dog): int => $dog->getId(), $dogs);
+
+        $qb = $this->createQueryBuilder('p');
+
+        return $qb->andWhere($qb->expr()->in('p.dog', $dogs))
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     /*
