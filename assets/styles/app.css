@@ -36,3 +36,15 @@ a.feed__add_comment {
 .feed__post_body {
     margin-left: 1em;
 }
+
+.feed__form_button {
+    margin-left: 5px;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    background-color:  #454f6c;
+}
+
+.feed__post_form {
+    min-width: 500px;
+}

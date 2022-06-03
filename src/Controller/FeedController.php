@@ -3,66 +3,96 @@
 namespace App\Controller;
 
 use App\Entity\Post;
-
 use App\Entity\Comment;
-use App\Service\PostCRUDService;
+use App\Entity\Dog;
 use App\Service\DogCRUDService;
-use App\Repository\PostRepository;
-use App\Repository\CommentRepository;
+use App\Service\CommentCRUDService;
+use App\Service\PostCRUDService;
+use App\Service\PackService;
 use App\Form\PostFormType;
 use App\Form\CommentFormType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class FeedController extends AbstractController
 {
-    public function index(DogCRUDService $dogService, PostRepository $postRepository, CommentRepository $commentRepository): Response
+    public function index(
+        DogCRUDService $dogService,
+        PostCRUDService $postService,
+        CommentCRUDService $commentService, 
+        PackService $packService
+        ): Response 
     {
+
         $dogUser = $this->getUser();
-        $dogUsername = $dogUser->getUserIdentifier();
-        // dd($dogUsername);
+
         $postAuthor = $dogService->getDogNiceName($dogUser);
-        $posts = $postRepository->findAllPostsByDog($dogUser);
+
+        $posts = $dogService->getAllPosts($dogUser);
 
         if(count($posts) === 0) {
             return $this->redirectToRoute('add_post');
         }
         
-        $posts = $postRepository->findAll();
+        $myPack = $packService->getPack($dogUser);
 
-        $comments = $commentRepository->findAll();
+        $postsPack = $postService->getAllMyPackPosts($myPack);
+        
+        array_push($postsPack, $posts);
 
-        return $this->render('feed/feed.html.twig', 
-        [
-            'posts' => $posts,
-            'currentDogUser' => $postAuthor,
-            'comments' => $comments,
+        $comments = $commentService->getAllCommentsByPosts($posts);
+
+        $dogs = $dogService->getAllDogs();
+
+        $otherDogUsers = $dogService->getDogsNotInPack($myPack, $dogs);
+
+        return $this->render(
+            'feed/feed.html.twig', 
+            [
+                'posts' => $posts,
+                'currentDogUserNiceName' => $postAuthor,
+                'currentDogUser' => $dogUser,
+                'comments' => $comments,
+                'dogUsers' => $otherDogUsers,
+                'myPack' => $myPack
             ]
         );
     }
 
-    public function createComment(Request $request, EntityManagerInterface $em , Post $post) : Response
+    public function addFriend(PackService $packService, Dog $dog): Response
+    {
+        $dogUser = $this->getUser();
+        $packService->addDogToPack($dogUser, $dog);
+        return $this->redirectToRoute('feed');
+    }
+
+    public function removeFriend(PackService $packService, Dog $dog): Response
+    {
+        return $this->redirectToRoute('feed');
+    }
+
+    public function createComment(Request $request, CommentCRUDService $commentService ,Post $post) : Response
     {
         $comment = new Comment();
-        $comment->setPost($post);
-        $form = $this->createForm(CommentFormType::class, $comment);
 
+        $form = $this->createForm(CommentFormType::class, $comment);
+        
         $dogUser = $this->getUser();
-        $comment->setDog($dogUser);
+
         $form->handleRequest($request);
         
-        if($form->isSubmitted() && $form->isValid()) {
-            $em->persist($comment);
-            $em->flush();
+        if($commentService->handleAddComment($comment, $post, $dogUser, $form)) {
             return $this->redirectToRoute('feed');
         }
 
         // Rendering the view if the form has not been submitted
-        return $this->render('feed/comment/add-comment.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'feed/comment/add-comment.html.twig', 
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     public function createPost(Request $request, DogCRUDService $dogService): Response 
@@ -80,8 +110,11 @@ class FeedController extends AbstractController
         }
 
         // Rendering the view if the form has not been submitted
-        return $this->render('feed/post/add-post.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'feed/post/add-post.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
     }
 }

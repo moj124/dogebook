@@ -77,7 +77,6 @@ class DogRepository extends ServiceEntityRepository implements PasswordUpgraderI
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Dog
@@ -91,6 +90,9 @@ class DogRepository extends ServiceEntityRepository implements PasswordUpgraderI
     }
     */
 
+    /**
+     * @return Dog[]
+     */
     public function getDogsPack(Dog $dog): array
     {
         return $this->findBy([
@@ -98,6 +100,9 @@ class DogRepository extends ServiceEntityRepository implements PasswordUpgraderI
         ]);
     }
 
+    /**
+     * @return Dog[]
+     */
     public function getPacksDogIsIn(Dog $dog): array
     {
         return $this->findBy([

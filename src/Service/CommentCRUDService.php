@@ -3,7 +3,11 @@
 namespace App\Service;
 
 use App\Repository\CommentRepository;
+use Lagdo\Symfony\Facades\Log;
+use Symfony\Component\Form\FormInterface;
 use App\Entity\Comment;
+use App\Entity\Dog;
+use App\Entity\Post;
 
 class CommentCRUDService 
 {
@@ -14,8 +18,39 @@ class CommentCRUDService
         $this->commentRepository = $commentRepository;
     }
 
-    public function saveComment(Comment $comment): void
-    {   
-        $this->commentRepository->add($comment);
+    /**
+     * @paramter Comment[] $posts
+     * @return Comment[] 
+     */ 
+    public function getAllCommentsByPosts(array $posts): array {
+        return $this->commentRepository->findAllCommentsByPosts($posts);
+    }
+
+    public function assignPost(Comment $comment, Post $post): void {
+        $comment->setPost($post);
+    }
+
+    public function assignDog(Comment $comment, Dog $dog): void {
+        $comment->setDog($dog);
+    }
+
+    public function handleAddComment(Comment $comment, Post $post, Dog $dog, FormInterface $form): bool
+    {
+        // is form posted in POST HTTP Response and is the form valid
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->assignPost($comment, $post);
+            $this->assignDog($comment, $dog);
+            $this->commentRepository->add($comment);
+
+            Log::info('CommentCRUDService@handleAddComment has added a comment', ['comment' => $comment, 'post' => $post, 'dog' => $dog]);
+
+
+            return true;
+        }
+
+        Log::info('CommentCRUDService@handleAddComment failed to add a comment', ['comment' => $comment, 'post' => $post, 'dog' => $dog]);
+
+        return false;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,7 +22,7 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    public function add(Comment $entity, bool $flush = false): void
+    public function add(Comment $entity, bool $flush = true): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +31,7 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Comment $entity, bool $flush = false): void
+    public function remove(Comment $entity, bool $flush = true): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,20 +40,25 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Comment[] Returns an array of Comment objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @parameter Post[] $posts
+    * @return Comment[] Returns an array of Comment objects
+    */
+   public function findAllCommentsByPosts(array $posts): array
+   {
+        if(count($posts) === 0){
+            return [];
+        }
+
+        $qb = $this->createQueryBuilder('c');
+
+        $posts = array_map(fn(Post $post) : int => $post->getId(), $posts);
+
+        return $qb->andWhere($qb->expr()->in("c.post", $posts))
+           ->orderBy('c.id', 'ASC')
+           ->getQuery()
+           ->getResult();
+   }
 
 //    public function findOneBySomeField($value): ?Comment
 //    {

@@ -21,6 +21,9 @@ class PackService
         $this->bus = $bus;
     }
 
+    /**
+    * @return Dog[]
+    */
     public function getPack(Dog $dog): array
     {
         return Cache::get(self::PACK_IDENTIFIER . $dog->getId(), 

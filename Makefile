@@ -7,7 +7,8 @@ SYMFONY_BIN ?= symfony
 # PHONY sets a virtual target when running Makefile commands, avoids targetting real files!
 # -----------------------------------------------------------------------------------------------
 # To make Entities - php bin/console make:entity
-
+# to load fixtures - php bin/console doctrine:fixtures:load  
+ 
 
 # run tests
 tests:
