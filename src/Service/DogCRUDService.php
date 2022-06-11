@@ -53,28 +53,4 @@ class DogCRUDService
     {
         return ucwords($dogUser->getUserIdentifier());
     }
-
-    /**
-     * @paramter Dog[] $dogs
-     * @paramter Dog[] $myPack
-     * @return Dog[]
-     */
-    public function getDogsNotInPack(array $myPack, array $dogs): array
-    {
-        if(count($myPack) === 0 || count($dogs) === 0) {
-            return [];
-        }
-
-        $myPack = array_map(fn(Dog $dog): int => $dog->getId(), $myPack);
-
-        $otherDogUsers = [];
-
-        foreach ( $dogs as $dog) {
-            if (!in_array($dog->getId(),$myPack)) {
-                array_push($otherDogUsers,$dog);
-            }
-        }
-
-        return $otherDogUsers;
-    }
 }

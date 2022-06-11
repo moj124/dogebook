@@ -30,23 +30,23 @@ class FeedController extends AbstractController
         $postAuthor = $dogService->getDogNiceName($dogUser);
 
         $posts = $dogService->getAllPosts($dogUser);
-
-        if(count($posts) === 0) {
-            return $this->redirectToRoute('add_post');
-        }
         
         $myPack = $packService->getPack($dogUser);
 
-        $postsPack = $postService->getAllMyPackPosts($myPack);
-        
-        array_push($postsPack, $posts);
+        if($myPack){
+            $postsPack = $postService->getAllMyPackPosts($myPack);
+            array_push($postsPack, $posts);
+        }
+
+        if(!$posts) {
+            return $this->redirectToRoute('add_post');
+        }
 
         $comments = $commentService->getAllCommentsByPosts($posts);
 
         $dogs = $dogService->getAllDogs();
 
-        $otherDogUsers = $dogService->getDogsNotInPack($myPack, $dogs);
-
+        $otherDogUsers = $packService->getDogsNotInPack($dogUser, $myPack, $dogs);
         return $this->render(
             'feed/feed.html.twig', 
             [
@@ -67,12 +67,32 @@ class FeedController extends AbstractController
         return $this->redirectToRoute('feed');
     }
 
-    public function removeFriend(PackService $packService, Dog $dog): Response
+    public function removePost(PostCRUDService $postService, Post $post): Response
     {
+        
+        $postService->removePost($post);
+        
         return $this->redirectToRoute('feed');
     }
 
-    public function createComment(Request $request, CommentCRUDService $commentService ,Post $post) : Response
+    public function removeComment(CommentCRUDService $commentService, Comment $comment): Response
+    {
+        $commentService->removeComment($comment);
+        
+        return $this->redirectToRoute('feed');
+    }
+
+    public function removeFriend(PackService $packService, Dog $dog): Response
+    {
+        
+        $dogUser = $this->getUser();
+
+        $packService->removeDogFromPack($dogUser,$dog);
+        
+        return $this->redirectToRoute('feed');
+    }
+
+    public function createComment(Request $request, CommentCRUDService $commentService, Post $post) : Response
     {
         $comment = new Comment();
 

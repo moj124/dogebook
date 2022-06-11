@@ -223,6 +223,16 @@ class Dog implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function removeDogFromPack(Dog $dog): self
+    {
+        if($this->myPack->contains($dog)) {
+            $this->myPack->removeElement($dog);
+            $this->partOfPacks->removeElement($dog);
+        }
+
+        return $this;
+    }
+
     public function getPartOfPacks()
     {
         return $this->partOfPacks;

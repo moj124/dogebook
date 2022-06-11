@@ -37,4 +37,15 @@ class PostCRUDService
         $comment->setPost($post);
         $this->commentRepository->add($comment);
     }
+
+    
+    public function removePost(Post $post): bool
+    {
+        if($this->postRepository->findOneByID($post)){
+            $this->postRepository->remove($post);
+            return true;
+        }
+
+        return false;
+    }
 }
