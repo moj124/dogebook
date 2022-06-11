@@ -28,10 +28,14 @@ class CommentCRUDService
 
     public function assignPost(Comment $comment, Post $post): void {
         $comment->setPost($post);
+
+        Log::info('CommentCRUDService@assignPosthas added a Post relation', ['comment' => $comment, 'post' => $post]);
     }
 
     public function assignDog(Comment $comment, Dog $dog): void {
         $comment->setDog($dog);
+
+        Log::info('CommentCRUDService@assignDog has added a Dog relation', ['comment' => $comment, 'dog' => $dog]);
     }
 
     public function handleAddComment(Comment $comment, Post $post, Dog $dog, FormInterface $form): bool
@@ -45,11 +49,20 @@ class CommentCRUDService
 
             Log::info('CommentCRUDService@handleAddComment has added a comment', ['comment' => $comment, 'post' => $post, 'dog' => $dog]);
 
-
             return true;
         }
 
         Log::info('CommentCRUDService@handleAddComment failed to add a comment', ['comment' => $comment, 'post' => $post, 'dog' => $dog]);
+
+        return false;
+    }
+
+    public function removeComment(Comment $comment): bool
+    {
+        if($this->commentRepository->findOneByID($comment)){
+            $this->commentRepository->remove($comment);
+            return true;
+        }
 
         return false;
     }

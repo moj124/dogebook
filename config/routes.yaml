@@ -43,9 +43,19 @@ add_post:
    controller: App\Controller\FeedController::createPost
    methods: POST
 
+remove_post:
+   path: /post/{id}/remove-post
+   controller: App\Controller\FeedController::removePost
+   methods: GET
+
 add_comment:
    path: /post/{id}/add-comment
    controller: App\Controller\FeedController::createComment
+   methods: POST|GET
+
+remove_comment:
+   path: /comment/{id}/remove-comment
+   controller: App\Controller\FeedController::removeComment
    methods: POST|GET
 
 add_friend:

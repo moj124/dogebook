@@ -8,7 +8,6 @@ use App\Entity\Dog;
 use App\Repository\DogRepository;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
-use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class FeedControllerTest extends WebTestCase
@@ -33,6 +32,7 @@ class FeedControllerTest extends WebTestCase
         $this->client->loginUser($testUser);
 
         $crawler = $this->client->request('GET','/add-post');
+
         $form = $crawler->selectButton('Save')->form();
         $form["post_form[post_text]"] = "testing post";
         $crawler = $this->client->submit($form);
@@ -45,9 +45,12 @@ class FeedControllerTest extends WebTestCase
     {
         $testUser = $this->dogRepo->findOneByUsername('testUser');
         $this->client->loginUser($testUser);
+
         $testUserPost = $this->postRepo->findBy(['post_text' => 'Woof woofingtons'])[0];
+
         $url = "/post/{$testUserPost->getId()}/add-comment";
         $crawler = $this->client->request('GET', $url);
+
         $form = $crawler->selectButton('Save')->form();
         $form["comment_form[comment_text]"] = 'testing comment';
         $crawler = $this->client->submit($form);
@@ -59,15 +62,14 @@ class FeedControllerTest extends WebTestCase
     public function testAddDogToPack(): void
     {
         $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $otherUser = $this->dogRepo->findOneByUsername('testAdmin');
         $this->client->loginUser($testUser);
 
-        $testUserPack = $this->dogRepo->getDogsPack($testUser);
-
-        $url = "/dog/{$testUser->getId()}/add-friend";
+        $url = "/dog/{$otherUser->getId()}/add-friend";
         $this->client->request('GET', $url);
         
         $newTestUserPack = $this->dogRepo->getDogsPack($testUser);
-        $this->assertTrue((count($testUserPack) + 1) === count($newTestUserPack));
+        $this->assertContains($otherUser, $newTestUserPack, '$otherUser Dog is not contained with the $newTestUserPack Array');
     }
 
     // public function testItCanEditAnExistingPost(): void
@@ -80,20 +82,53 @@ class FeedControllerTest extends WebTestCase
     //     // Should assert that the db was updated
     // }
 
-    // public function testItCanDeleteAPost(): void
-    // {
-    //     // Should be able to log in as a user and delete a post by id
-    // }
+    public function testItCanDeleteAPost(): void
+    {
+        // Should be able to log in as a user and delete a post by id
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $this->client->loginUser($testUser);
 
-    // public function testItCanDeleteComment(): void
-    // {
-    //     // Should be able to log in as a user and delete a post by id
-    // }
+        $posts = $this->postRepo->findAllPostsByDog($testUser);
+        $post = $posts[0];
 
-    // public function testItCanRemovePackMember(): void
-    // {
-    //     // Should be able to log in as a user and delete a post by id
-    // }
+        $url = "/post/{$post->getId()}/remove-post";
+        $this->client->request('GET', $url);
+
+        $this->assertEquals($post->getId(), NULL);
+    }
+
+    public function testItCanDeleteComment(): void
+    {
+        // Should be able to log in as a user and delete a comment by id
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $this->client->loginUser($testUser);
+
+        $posts = $this->postRepo->findAllPostsByDog($testUser);
+        $post = $posts[0];
+
+        $comments = $this->commentRepo->findAllCommentsByPosts([$post]);
+        $comment = $comments[0];
+
+        $url = "/comment/{$comment->getId()}/remove-comment";
+        $this->client->request('GET', $url);
+
+        $this->assertEquals($comment->getId(), NULL);
+    }
+
+    public function testItCanRemovePackMember(): void
+    {
+        // Should be able to log in as a user and remove a pack member by id
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $otherUser = $this->dogRepo->findOneByUsername('testUser1');
+        $this->client->loginUser($testUser);
+
+        $url = "/dog/{$otherUser->getId()}/remove-friend";
+        $this->client->request('GET', $url);
+        
+        $newTestUserPack = $this->dogRepo->getDogsPack($testUser);
+
+        $this->assertNotContains($otherUser, $newTestUserPack, '$otherUser Dog is contained with the $newTestUserPack Array');
+    }
 
     // public function testItCanRemoveSelfFromPack(): void
     // {
