@@ -8,6 +8,7 @@ SYMFONY_BIN ?= symfony
 # -----------------------------------------------------------------------------------------------
 # To make Entities - php bin/console make:entity
 # to load fixtures - php bin/console doctrine:fixtures:load  
+# to run tests on a specific file - ./vendor/bin/simple-phpunit --filter FeedControllerTest
  
 
 # run tests
