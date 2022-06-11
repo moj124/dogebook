@@ -29,7 +29,7 @@ class UserFixture extends Fixture
 
         $manager->persist($dogUser);
         $this->addReference(self::USER_REFERENCE, $dogUser);
-        $manager->flush();
+
 
         // Admin User
         $dogAdmin = new Dog();
@@ -41,7 +41,7 @@ class UserFixture extends Fixture
 
         $manager->persist($dogAdmin);
         $this->addReference(self::ADMIN_REFERENCE, $dogAdmin);
-        $manager->flush();
+
 
         // Friend group
         $dog1 = (new Dog())
@@ -61,6 +61,7 @@ class UserFixture extends Fixture
         $dog2->setPartOfPacks($dogUser);
         $dogUser->setPartOfPacks($dog2);
         $manager->persist($dog2);
+        
         $manager->flush();
     }
 }
