@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Repository\PostRepository;
+use Lagdo\Symfony\Facades\Log;
+use Symfony\Component\Form\FormInterface;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Entity\Dog;
@@ -31,6 +33,41 @@ class PostCRUDService
         return $this->postRepository->findAllPostsByDogPack($dogs);
     }
 
+    public function handleAddPost(Post $post, Dog $dog, FormInterface $form): bool
+    {
+        // is form posted in POST HTTP Response and is the form valid
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $post->setDog($dog);
+            $this->postRepository->add($post);
+
+            Log::info('PostCRUDService@handleAddPost has added a post', ['post' => $post,]);
+
+            return true;
+        }
+
+        Log::info('PostCRUDService@handleAddPost failed to add a post', ['post' => $post,]);
+
+        return false;
+    }
+
+    public function handleEditPost(Post $post, FormInterface $form): bool
+    {
+        // is form posted in POST HTTP Response and is the form valid
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->postRepository->add($post);
+
+            Log::info('PostCRUDService@handleAddPost has edited a post', ['post' => $post,]);
+
+            return true;
+        }
+
+        Log::info('PostCRUDService@handleAddPost failed to edit a post', ['post' => $post,]);
+
+        return false;
+    }
+
     public function addPostComment(Comment $comment, Dog $dogUser, Post $post): void
     {   
         $comment->setDog($dogUser);
@@ -39,13 +76,8 @@ class PostCRUDService
     }
 
     
-    public function removePost(Post $post): bool
+    public function removePost(Post $post): void
     {
-        if($this->postRepository->findOneByID($post)){
-            $this->postRepository->remove($post);
-            return true;
-        }
-
-        return false;
+        $this->postRepository->remove($post);
     }
 }
