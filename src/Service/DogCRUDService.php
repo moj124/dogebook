@@ -27,12 +27,6 @@ class DogCRUDService
         $this->dogRepository->add($dog);
     }
 
-    public function savePostForDog(Dog $dog,Post $post): void
-    {
-        $post->setDog($dog);
-        $this->postRepository->add($post);
-    }
-
     /**
      * @accepts Dog $dog
      * @return Post[]
