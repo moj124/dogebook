@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Entity\Comment;
-use App\Entity\Dog;
 use App\Service\DogCRUDService;
 use App\Service\CommentCRUDService;
 use App\Service\PostCRUDService;
@@ -60,34 +59,28 @@ class FeedController extends AbstractController
         );
     }
 
-    public function addFriend(PackService $packService, Dog $dog): Response
-    {
-        $dogUser = $this->getUser();
-        $packService->addDogToPack($dogUser, $dog);
-        return $this->redirectToRoute('feed');
-    }
-
     public function removePost(PostCRUDService $postService, Post $post): Response
     {
-        
+        $dogUser = $this->getUser();
+
+        if($post->getDog() !== $dogUser) {
+            return Response::HTTP_UNPROCESSABLE_ENTITY;
+        }
+
         $postService->removePost($post);
         
         return $this->redirectToRoute('feed');
     }
-
+    
     public function removeComment(CommentCRUDService $commentService, Comment $comment): Response
     {
-        $commentService->removeComment($comment);
-        
-        return $this->redirectToRoute('feed');
-    }
-
-    public function removeFriend(PackService $packService, Dog $dog): Response
-    {
-        
         $dogUser = $this->getUser();
 
-        $packService->removeDogFromPack($dogUser,$dog);
+        if($comment->getDog() !== $dogUser) {
+            return Response::HTTP_UNPROCESSABLE_ENTITY;
+        }
+
+        $commentService->removeComment($comment);
         
         return $this->redirectToRoute('feed');
     }
@@ -95,7 +88,7 @@ class FeedController extends AbstractController
     public function createComment(Request $request, CommentCRUDService $commentService, Post $post) : Response
     {
         $comment = new Comment();
-
+        
         $form = $this->createForm(CommentFormType::class, $comment);
         
         $dogUser = $this->getUser();
@@ -115,7 +108,7 @@ class FeedController extends AbstractController
         );
     }
 
-    public function createPost(Request $request, DogCRUDService $dogService): Response 
+    public function createPost(Request $request, PostCRUDService $postService): Response 
     {
         $post = new Post();
 
@@ -124,8 +117,45 @@ class FeedController extends AbstractController
         $dogUser = $this->getUser();
         $form->handleRequest($request);
         
-        if($form->isSubmitted() && $form->isValid()) {
-            $dogService->savePostForDog($dogUser, $post);
+        if($postService->handleAddPost($post, $dogUser, $form)) {
+            return $this->redirectToRoute('feed');
+        }
+
+        // Rendering the view if the form has not been submitted
+        return $this->render(
+            'feed/post/add-post.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    public function editPost(Request $request, PostCRUDService $postService, Post $post): Response 
+    {
+        $form = $this->createForm(PostFormType::class, $post);
+
+        $form->handleRequest($request);
+        
+        if($postService->handleEditPost($post, $form)) {
+            return $this->redirectToRoute('feed');
+        }
+
+        // Rendering the view if the form has not been submitted
+        return $this->render(
+            'feed/post/add-post.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    public function editComment(Request $request, CommentCRUDService $commentService, Comment $comment): Response 
+    {
+        $form = $this->createForm(CommentFormType::class, $comment);
+
+        $form->handleRequest($request);
+        
+        if($commentService->handleEditComment($comment, $form)) {
             return $this->redirectToRoute('feed');
         }
 
