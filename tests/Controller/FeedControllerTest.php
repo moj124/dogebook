@@ -72,15 +72,30 @@ class FeedControllerTest extends WebTestCase
         $this->assertContains($otherUser, $newTestUserPack, '$otherUser Dog is not contained with the $newTestUserPack Array');
     }
 
-    // public function testItCanEditAnExistingPost(): void
-    // {
-    //     $testUser = $this->dogRepo->findOneByUsername('testUser');
-    //     $this->client->loginUser($testUser);
+    public function testGetALlThings(): void
+    {
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $this->postRepo->findAllPostsByDogPack([$testUser]);
+        $this->assertTrue(true);
+    }
 
-    //     // We will need to find a new form here to do the edit
-    //     // Posts exist for the testUser already and their content is set. Just need to update it
-    //     // Should assert that the db was updated
-    // }
+    public function testItCanEditAnExistingPost(): void
+    {
+        $testUser = $this->dogRepo->findOneByUsername('testUser');
+        $this->client->loginUser($testUser);
+
+        $testUserPost = $this->postRepo->findBy(['post_text' => 'Woof woofingtons'])[0];
+
+        $url = "/post/{$testUserPost->getId()}/edit-post";
+        $crawler = $this->client->request('GET', $url);
+
+        $form = $crawler->selectButton('Save')->form();
+        $form["post_form[post_text]"] = 'testing post';
+        $crawler = $this->client->submit($form);
+        
+        $newPost = $this->postRepo->findBy(['post_text' => 'testing post'])[0];
+        $this->assertTrue($newPost->getPostText() === 'testing post');
+    }
 
     public function testItCanDeleteAPost(): void
     {
