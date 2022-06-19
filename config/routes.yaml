@@ -38,6 +38,16 @@ form_post:
    controller: App\Controller\FeedController::createPost
    methods: GET
 
+edit_post:
+   path: /post/{id}/edit-post
+   controller: App\Controller\FeedController::editPost
+   methods: GET|POST
+
+edit_comment:
+   path: /comment/{id}/edit-comment
+   controller: App\Controller\FeedController::editComment
+   methods: GET|POST
+
 add_post:
    path: /add-post
    controller: App\Controller\FeedController::createPost
@@ -60,12 +70,12 @@ remove_comment:
 
 add_friend:
    path: /dog/{id}/add-friend
-   controller: App\Controller\FeedController::addFriend
+   controller: App\Controller\PackController::addFriend
    methods: GET
 
 remove_friend:
    path: /dog/{id}/remove-friend
-   controller: App\Controller\FeedController::removeFriend
+   controller: App\Controller\PackController::removeFriend
    methods: GET
 
 profile:
@@ -73,8 +83,8 @@ profile:
    controller: App\Controller\ProfileController::index
    methods: GET
 
-groups:
-   path: /groups
+packs:
+   path: /packs
    controller: App\Controller\GroupsController::index
    methods: GET
 
