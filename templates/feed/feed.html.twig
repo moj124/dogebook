@@ -14,6 +14,7 @@
                     <div class="mb-3 feed__post_meta">
                         <strong class="text-capitalize">{{ post.dog.username }}</strong>
                         <a href="{{ path('remove_post', { id:post.id }) }}" type="button" class="border border-light rounded feed__form_button">remove</a>
+                        <a href="{{ path('edit_post', { id:post.id }) }}" type="button" class="border border-light rounded feed__form_button">edit</a>
                     </div>
                     <p class="feed__post_body">{{ post.postText }}</p>
                     <div class="d-flex justify-content-between align-items-end">
@@ -33,6 +34,7 @@
                                 <div class="mb-3 feed__comment_meta">
                                     <strong class="text-capitalize">{{ comment.dog.username }}</strong>
                                     <a href="{{ path('remove_comment', { id:comment.id }) }}" type="button" class="border border-light rounded feed__form_button">remove</a>
+                                    <a href="{{ path('edit_comment', { id:comment.id }) }}" type="button" class="border border-light rounded feed__form_button">edit</a>
                                 </div>
                                 <p class="feed__post_body">{{ comment.commentText }}</p>
                             </div>
