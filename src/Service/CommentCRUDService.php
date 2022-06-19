@@ -38,6 +38,23 @@ class CommentCRUDService
         Log::info('CommentCRUDService@assignDog has added a Dog relation', ['comment' => $comment, 'dog' => $dog]);
     }
 
+    public function handleEditComment(Comment $comment, FormInterface $form): bool
+    {
+        // is form commented in POST HTTP Response and is the form valid
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->commentRepository->add($comment);
+
+            Log::info('CommentCRUDService@handleAddComment has edited a comment', ['comment' => $comment,]);
+
+            return true;
+        }
+
+        Log::info('CommentCRUDService@handleAddComment failed to edit a comment', ['comment' => $comment,]);
+
+        return false;
+    }
+
     public function handleAddComment(Comment $comment, Post $post, Dog $dog, FormInterface $form): bool
     {
         // is form posted in POST HTTP Response and is the form valid
